@@ -1,0 +1,4 @@
+.page{ float:right; padding:10px;}
+		.page div{border-left:1px solid #09F; overflow:hidden;}
+		.page span,.page a{ float:left; height:32px; line-height:32px; padding:0px 10px;background:#fff; border:1px solid #09F; border-left:none; font-size:14px;}
+		.page .current{ background:#09f; color:#fff;}

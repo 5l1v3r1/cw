@@ -1,0 +1,559 @@
+<extend name="public/template" />
+<block name="headerlink">
+	<!-- BEGIN PAGE LEVEL STYLES -->
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/metronic3_7/assets/global/plugins/select2/select2.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/metronic3_7/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-datepicker/css/datepicker.css"/>
+  <link href="__PUBLIC__/metronic3_7/assets/admin/pages/css/todo.css" rel="stylesheet" type="text/css"/>
+	<!-- END PAGE LEVEL STYLES -->
+
+</block>
+<block name="siderbarmenu">
+	<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+		<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+		<li class="sidebar-toggler-wrapper">
+			<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+			<div class="sidebar-toggler">
+			</div>
+			<!-- END SIDEBAR TOGGLER BUTTON -->
+		</li>
+		<!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+		<li class="sidebar-search-wrapper">
+			<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+			<!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+			<!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+			<form class="sidebar-search " action="extra_search.html" method="POST">
+				<a href="javascript:;" class="remove">
+				<i class="icon-close"></i>
+				</a>
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search...">
+					<span class="input-group-btn">
+					<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+					</span>
+				</div>
+			</form>
+			<!-- END RESPONSIVE QUICK SEARCH FORM -->
+		</li>
+		<li class="start">
+			<a href="javascript:;">
+			<i class="icon-home"></i>
+			<span class="title">Dashboard</span>
+			<span class="selected"></span>
+			<span class="arrow open"></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Dashboard/index');}">
+					<i class="icon-bar-chart"></i>
+					Default Dashboard</a>
+				</li>
+				<li>
+					<a href="{:U('Dashboard/showDataMoneyAnalysis');}">
+					<i class="icon-bar-chart"></i>
+					Data Analysis</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="icon-basket"></i>
+			<span class="title">eCommerce</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Order/showDataAnalysisPage');}">
+					<i class="icon-home"></i>
+					Dashboard</a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=2');}">
+					<i class="icon-bell"></i>
+					<span class="badge badge-danger">{$cin}</span>
+					Orders Ongoing</a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=4');}">
+					<i class="fa fa-warning"></i>
+					<span class="badge badge-danger">{$cin1}</span>
+					<font color="red">Orders Warning</font></a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=1');}">
+					<i class="fa fa-lock"></i>
+					Complete Orders</a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=3');}">
+					<i class="icon-basket"></i>
+					Orders All</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-bar-chart"></i>
+						Data Analysis
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li class="active open">
+			<a href="javascript:;">
+				<i class="fa fa-code"></i>
+				<span class="title">Workers</span>
+				<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li class="active">
+					<a href="{:U('Worker/showDataAnalysisPage');}">
+					<i class="icon-home"></i>
+					Dashboard</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerRecommandPage');}">
+						<i class="fa fa-smile-o" aria-hidden="true"></i>
+						Workers Recommand
+					</a>
+				</li>
+				<li class="active">
+					<a href="{:U('Worker/workerlist');}">
+						<i class="fa fa-list" aria-hidden="true"></i>
+						ALL Workers Workers
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist?type=4');}">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						free workers
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist?type=5');}">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						busy workers
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist?type=2');}">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						Income > 0
+					</a>
+				</li>
+				<li >
+					<a href="{:U('Worker/workerlist?type=1');}">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						Income = 0
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist?type=3');}">
+						<i class="fa fa-user-times" aria-hidden="true"></i>
+						dead workers
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-bar-chart"></i>
+						Data Analysis
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="fa fa-wrench" aria-hidden="true"></i>
+			<span class="title">Tools</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Tool/exchangeToolPage');}">
+						<i class="fa fa-exchange" aria-hidden="true"></i> Transfer Tools
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="icon-settings"></i>
+			<span class="title">Configuration</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Configure/exchangelist');}">
+						<i class="fa fa-line-chart" aria-hidden="true"></i>
+						Exchange Rate
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/techlist');}">
+						<i class="fa fa-microchip" aria-hidden="true"></i>
+						Technologies Conf
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/tradelist');}">
+						<i class="fa fa-info-circle" aria-hidden="true"></i>
+						Trade Conf
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/shortcutlistpage');}">
+						<i class="fa fa-sliders" aria-hidden="true"></i>
+						Shortcut Conf
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/tipslist');}">
+						<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+						Tips Conf
+					</a>
+				</li>
+
+			</ul>
+		</li>
+	</ul>
+</block>
+<block name="container">
+	<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<h3 class="page-title">
+			Worker #{$workerinfo.wxid} <small>worker detail</small>
+			</h3>
+			<div class="page-bar">
+				<ul class="page-breadcrumb">
+					<li>
+						<i class="fa fa-home"></i>
+						<a href="{:U('Dashboard/index');}">Home</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="#">Workers</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist');}">Worker info</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="#">Worker Detail</a>
+					</li>
+				</ul>
+				<div class="page-toolbar">
+					<div class="btn-group pull-right">
+						<button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+						Actions <i class="fa fa-angle-down"></i>
+						</button>
+						<ul class="dropdown-menu pull-right" role="menu">
+							<li>
+								<a href="#">Action</a>
+							</li>
+							<li>
+								<a href="#">Another action</a>
+							</li>
+							<li>
+								<a href="#">Something else here</a>
+							</li>
+							<li class="divider">
+							</li>
+							<li>
+								<a href="#">Separated link</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+					<div class="dashboard-stat red-intense">
+						<div class="visual">
+							<i class="fa fa-briefcase fa-icon-medium"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								 {$workerinfo.income} RMB
+							</div>
+							<div class="desc">
+								 Total Income
+							</div>
+						</div>
+						<a class="more" href="javascript:;">
+						View more <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<div class="dashboard-stat green-haze">
+						<div class="visual">
+							<i class="fa fa-group fa-icon-medium"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								 {$workerinfo.orderonging}
+							</div>
+							<div class="desc">
+								 Onging Projects
+							</div>
+						</div>
+						<a class="more" href="javascript:;">
+						View more <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<div class="dashboard-stat blue-madison">
+						<div class="visual">
+							<i class="fa fa-shopping-cart"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								 {$workerinfo.orderall}
+							</div>
+							<div class="desc">
+								 Total Projects
+							</div>
+						</div>
+						<a class="more" href="javascript:;">
+						View more <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN TODO SIDEBAR -->
+					<div>
+						<div class="todo-sidebar">
+							<div class="portlet light">
+								<div class="portlet-title">
+									<div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
+										<span class="caption-subject font-green-sharp bold uppercase">
+											<i class="icon-user-following"></i> Worker profile
+										</span>
+									</div>
+								</div>
+								<div class="portlet-body todo-project-list-content" style="height: auto;">
+									<div class="todo-project-list">
+										<ul class="nav nav-pills nav-stacked">
+											<li>
+												<i class="fa fa-wechat"></i> {$workerinfo.wxid} </a>
+											</li>
+											<li>
+												<i class="fa fa-user"></i> {$workerinfo.wxname} </a>
+											</li>
+											<li>
+												<i class="fa fa-envelope-o"></i> {$workerinfo.email} </a>
+											</li>
+											<li>
+												<i class="fa fa-star-o"></i> {$workerinfo.remark} </a>
+											</li>
+											<li>
+												<i class="fa fa-clock-o"></i> {$workerinfo.addtime} </a>
+											</li>
+
+											<li>
+												<i class="fa fa-cog"></i>Technologies
+											</li>
+											<li>
+												<foreach name="workerinfo.teches" item="item">
+													&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-terminal"></i>{$item.content}<br>
+												</foreach>
+
+											</li>
+											<li>
+												<div class="todo-tasklist-item-text">
+															 <i class="fa fa-comments-o"></i> {$workerinfo.description}
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- END TODO SIDEBAR -->
+						<!-- BEGIN TODO CONTENT -->
+						<div class="todo-content">
+							<div class="portlet light">
+								<!-- PROJECT HEAD -->
+								<div class="portlet-title">
+									<div class="caption">
+										<i class="icon-bar-chart font-green-sharp"></i>
+										<span class="caption-subject font-green-sharp bold uppercase"> PROJECTS</span>
+									</div>
+									<div class="actions">
+										<div class="btn-group">
+											<a class="btn green-haze btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+											MANAGE <i class="fa fa-angle-down"></i>
+											</a>
+											<ul class="dropdown-menu pull-right">
+												<li>
+													<a href="javascript:;">
+													<i class="i"></i> New Task </a>
+												</li>
+												<li class="divider">
+												</li>
+												<li>
+													<a href="javascript:;">
+													Pending <span class="badge badge-danger">
+													4 </span>
+													</a>
+												</li>
+												<li>
+													<a href="javascript:;">
+													Completed <span class="badge badge-success">
+													12 </span>
+													</a>
+												</li>
+												<li>
+													<a href="javascript:;">
+													Overdue <span class="badge badge-warning">
+													9 </span>
+													</a>
+												</li>
+												<li class="divider">
+												</li>
+												<li>
+													<a href="javascript:;">
+													<i class="i"></i> Delete Project </a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<!-- end PROJECT HEAD -->
+								<div class="portlet-body">
+									<div class="row">
+
+										<div class="col-md-6 col-sm-8">
+											<h4><i class="fa fa-list-ul"></i> Incomplete projects</h4>
+											<div class="scroller" style="max-height: 1000px;" data-always-visible="0" data-rail-visible="0" data-handle-color="#dae3e7">
+												<foreach name="workerinfo.orderincomelist" item="item">
+													<div class="form-group">
+														<div class="col-md-12">
+															<ul class="media-list">
+																<li class="media">
+																		<if condition="($item.g_state eq 2) AND ($item.w_state eq 2) ">
+																			<div class="media-body todo-comment todo-tasklist-item todo-tasklist-item-border-red">
+																		<else />
+																			<div class="media-body todo-comment todo-tasklist-item todo-tasklist-item-border-green">
+																		</if>
+																		<p class="todo-comment-head">
+																			<span class="todo-comment-username">
+																				<i class="fa fa-check-square"></i>&nbsp;{$item.projectname}</span>
+																		</p>
+																		<p class="todo-text-color">
+																			<span class="label label-sm label-success circle">W</span> {$item.w_deadline}
+																			<br><span class="label label-sm label-danger circle">G</span><strong> {$item.g_deadline}</strong>
+																			<br>
+																			<i class="fa fa-volume-up"></i>
+																			<switch name="item.g_state">
+																				<case value="0" break="1"><span class="label label-sm label-danger">Guest No gurrentee</span></case>
+																				<case value="1"><span class="label label-sm label-danger">Guest Only gurrentee</span></case>
+																				<default /><span class="label label-sm label-success"> Guest Have paid All</span>
+																			</switch>
+																			<switch name="item.w_state">
+																				<case value="1"><span class="label label-sm label-danger">Worker doing</span></case>
+																				<case value="2"><span class="label label-sm label-danger">Worker done & no paid</span></case>
+																				<case value="3"><span class="label label-sm label-success">Woker done & paid</span></case>
+																				<default /><span class="label label-sm label-default">Worker unset </span>
+																			</switch>
+																			<br>
+																			<span class="label label-sm label-info circle">P</span> {$item.totalprice} {$item.moneytype}/{$item.guarantee} {$item.moneytype}
+																			<br>
+																			<span class="label label-sm label-warning circle">S</span> {$item.w_payment}RMB
+																		</p>
+																		<div class="todo-tasklist-controls pull-left">
+																			<span class="todo-tasklist-date"><i class="fa fa-calendar"></i> {$item.createtime} </span>
+																			<a href="{:U('Order/orderdetailpage?go=1&orderid='.$item['orderid'].'');}" class="btn btn-xs grey-cascade">
+																				 <i class="fa fa-link"></i> View
+																			</a>
+																		</div>
+																		<!-- Nested media object -->
+																	</div>
+
+																</li>
+															</ul>
+														</div>
+													</div>
+												</foreach>
+
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-4">
+											<h4><i class="fa fa-list-ul"></i> All projects</h4>
+											<div class="scroller" style="max-height: 600px;" data-always-visible="0" data-rail-visible="0" data-handle-color="#dae3e7">
+												<div class="todo-tasklist">
+													<foreach name="workerinfo.orderlist" item="item">
+														<if condition="($item.g_state eq 2) AND ($item.w_state eq 3) ">
+															<div class="todo-tasklist-item todo-tasklist-item-border-green">
+														<else />
+															<div class="todo-tasklist-item todo-tasklist-item-border-red">
+														</if>
+
+															<div class="todo-tasklist-item-title">
+																  <i class="fa fa-check-square-o"></i>
+																	&nbsp;{$item.projectname}
+															</div>
+															<div class="todo-tasklist-item-text">
+																<i class="fa fa-volume-up"></i>
+																<switch name="item.g_state">
+																	<case value="0" break="1"><span class="label label-sm label-danger">Guest No gurrentee</span></case>
+																	<case value="1"><span class="label label-sm label-danger">Guest Only gurrentee</span></case>
+																	<default /><span class="label label-sm label-success"> Guest Have paid All</span>
+																</switch>
+																<switch name="item.w_state">
+																	<case value="1"><span class="label label-sm label-danger">Worker doing</span></case>
+																	<case value="2"><span class="label label-sm label-danger">Worker done & no paid</span></case>
+																	<case value="3"><span class="label label-sm label-success">Woker done & paid</span></case>
+																	<default /><span class="label label-sm label-default">Worker unset </span>
+																</switch>
+																<br>
+																<span class="label label-sm label-info circle">P</span> {$item.totalprice} {$item.moneytype}/{$item.guarantee} {$item.moneytype}
+																<span class="label label-sm label-warning circle">S</span> {$item.w_payment}RMB
+															</div>
+															<div class="todo-tasklist-controls pull-left">
+																<span class="todo-tasklist-date"><i class="fa fa-calendar"></i> {$item.createtime} </span>
+																<a href="{:U('Order/orderdetailpage?go=1&orderid='.$item['orderid'].'');}" class="btn btn-xs grey-cascade">
+																	 <i class="fa fa-link"></i> View
+																</a>
+															</div>
+														</div>
+													</foreach>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- END TODO CONTENT -->
+					</div>
+				</div>
+				<!-- END PAGE CONTENT-->
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+</block>
+<block name="footscript">
+  <script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/select2/select2.min.js"></script>
+  <script src="__PUBLIC__/metronic3_7/assets/admin/pages/scripts/todo.js" type="text/javascript"></script>
+  <!-- END PAGE PLUGINS & SCRIPTS -->
+  <script src="__PUBLIC__/metronic3_7/assets/global/scripts/metronic.js" type="text/javascript"></script>
+  <script src="__PUBLIC__/metronic3_7/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+  <script src="__PUBLIC__/metronic3_7/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+  <script src="__PUBLIC__/metronic3_7/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+  <script>
+      jQuery(document).ready(function() {
+          Metronic.init(); // init metronic core components
+  Layout.init(); // init current layout
+  QuickSidebar.init(); // init quick sidebar
+  Demo.init(); // init demo features
+  Todo.init(); // init todo page
+      });
+  </script>
+</block>

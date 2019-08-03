@@ -1,0 +1,641 @@
+<extend name="public/template" />
+<block name="headerlink">
+	<!-- BEGIN PAGE LEVEL STYLES -->
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/metronic3_7/assets/global/plugins/select2/select2.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/metronic3_7/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-datepicker/css/datepicker.css"/>
+	<!-- END PAGE LEVEL STYLES -->
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/metronic3_7/assets/admin/pages/css/pagecode.css"/>
+</block>
+<block name="siderbarmenu">
+	<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+		<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+		<li class="sidebar-toggler-wrapper">
+			<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+			<div class="sidebar-toggler">
+			</div>
+			<!-- END SIDEBAR TOGGLER BUTTON -->
+		</li>
+		<!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+		<li class="sidebar-search-wrapper">
+			<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+			<!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+			<!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+			<form class="sidebar-search " action="extra_search.html" method="POST">
+				<a href="javascript:;" class="remove">
+				<i class="icon-close"></i>
+				</a>
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search...">
+					<span class="input-group-btn">
+					<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+					</span>
+				</div>
+			</form>
+			<!-- END RESPONSIVE QUICK SEARCH FORM -->
+		</li>
+		<li class="start">
+			<a href="javascript:;">
+			<i class="icon-home"></i>
+			<span class="title">Dashboard</span>
+			<span class="selected"></span>
+			<span class="arrow open"></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Dashboard/index');}">
+					<i class="icon-bar-chart"></i>
+					Default Dashboard</a>
+				</li>
+				<li>
+					<a href="{:U('Dashboard/showDataMoneyAnalysis');}">
+					<i class="icon-bar-chart"></i>
+					Data Analysis</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="icon-basket"></i>
+			<span class="title">eCommerce</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Order/showDataAnalysisPage');}">
+					<i class="icon-home"></i>
+					Dashboard</a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=2');}">
+					<i class="icon-bell"></i>
+					<span class="badge badge-danger">{$cin}</span>
+					Orders Ongoing</a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=4');}">
+					<i class="fa fa-warning"></i>
+					<span class="badge badge-danger">{$cin1}</span>
+					<font color="red">Orders Warning</font></a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=1');}">
+					<i class="fa fa-lock"></i>
+					Complete Orders</a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=3');}">
+					<i class="icon-basket"></i>
+					Orders All</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-bar-chart"></i>
+						Data Analysis
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li  class="active">
+			<a href="javascript:;">
+				<i class="fa fa-code"></i>
+				<span class="title">Workers</span>
+				<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li class="active">
+					<a href="{:U('Worker/showDataAnalysisPage');}">
+					<i class="icon-home"></i>
+					Dashboard</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerRecommandPage');}">
+						<i class="fa fa-smile-o" aria-hidden="true"></i>
+						Workers Recommand
+					</a>
+				</li>
+				<if condition="$type eq 1">
+					<li>
+						<a href="{:U('Worker/workerlist');}">
+							<i class="fa fa-list" aria-hidden="true"></i>
+							ALL Workers Workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=4');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							free workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=5');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							busy workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=2');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							Income > 0
+						</a>
+					</li>
+					<li class="active">
+						<a href="{:U('Worker/workerlist?type=1');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							Income = 0
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=3');}">
+							<i class="fa fa-user-times" aria-hidden="true"></i>
+							dead workers
+						</a>
+					</li>
+				<elseif condition="$type eq 2"/>
+					<li>
+						<a href="{:U('Worker/workerlist');}">
+							<i class="fa fa-list" aria-hidden="true"></i>
+							ALL Workers Workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=4');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							free workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=5');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							busy workers
+						</a>
+					</li>
+					<li class="active">
+						<a href="{:U('Worker/workerlist?type=2');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							Income > 0
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=1');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							Income = 0
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=3');}">
+							<i class="fa fa-user-times" aria-hidden="true"></i>
+							dead workers
+						</a>
+					</li>
+				<elseif condition="$type eq 3"/>
+					<li>
+						<a href="{:U('Worker/workerlist');}">
+							<i class="fa fa-list" aria-hidden="true"></i>
+							ALL Workers Workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=4');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							free workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=5');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							busy workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=2');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							Income > 0
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=1');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							Income = 0
+						</a>
+					</li>
+					<li class="active">
+						<a href="{:U('Worker/workerlist?type=3');}">
+							<i class="fa fa-user-times" aria-hidden="true"></i>
+							dead workers
+						</a>
+					</li>
+				<elseif condition="$type eq 4"/>
+					<li>
+						<a href="{:U('Worker/workerlist');}">
+							<i class="fa fa-list" aria-hidden="true"></i>
+							ALL Workers Workers
+						</a>
+					</li>
+					<li class="active">
+						<a href="{:U('Worker/workerlist?type=4');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							free workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=5');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							busy workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=2');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							Income > 0
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=1');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							Income = 0
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=3');}">
+							<i class="fa fa-user-times" aria-hidden="true"></i>
+							dead workers
+						</a>
+					</li>
+				<elseif condition="$type eq 5"/>
+					<li>
+						<a href="{:U('Worker/workerlist');}">
+							<i class="fa fa-list" aria-hidden="true"></i>
+							ALL Workers Workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=4');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							free workers
+						</a>
+					</li>
+					<li class="active">
+						<a href="{:U('Worker/workerlist?type=5');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							busy workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=2');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							Income > 0
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=1');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							Income = 0
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=3');}">
+							<i class="fa fa-user-times" aria-hidden="true"></i>
+							dead workers
+						</a>
+					</li>
+				<else />
+					<li class="active">
+						<a href="{:U('Worker/workerlist');}">
+							<i class="fa fa-list" aria-hidden="true"></i>
+							ALL Workers Workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=4');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							free workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=5');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							busy workers
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=2');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							Income > 0
+						</a>
+					</li>
+					<li >
+						<a href="{:U('Worker/workerlist?type=1');}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							Income = 0
+						</a>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist?type=3');}">
+							<i class="fa fa-user-times" aria-hidden="true"></i>
+							dead workers
+						</a>
+					</li>
+				</if>
+
+				<li>
+					<a href="#">
+						<i class="icon-bar-chart"></i>
+						Data Analysis
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="fa fa-wrench" aria-hidden="true"></i>
+			<span class="title">Tools</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Tool/exchangeToolPage');}">
+						<i class="fa fa-exchange" aria-hidden="true"></i> Transfer Tools
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="icon-settings"></i>
+			<span class="title">Configuration</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Configure/exchangelist');}">
+						<i class="fa fa-line-chart" aria-hidden="true"></i>
+						Exchange Rate
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/techlist');}">
+						<i class="fa fa-microchip" aria-hidden="true"></i>
+						Technologies Conf
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/tradelist');}">
+						<i class="fa fa-info-circle" aria-hidden="true"></i>
+						Trade Conf
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/shortcutlistpage');}">
+						<i class="fa fa-sliders" aria-hidden="true"></i>
+						Shortcut Conf
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/tipslist');}">
+						<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+						Tips Conf
+					</a>
+				</li>
+
+			</ul>
+		</li>
+	</ul>
+</block>
+<block name="container">
+	<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<h3 class="page-title">
+			Workers <small>workers listing</small>
+			</h3>
+			<div class="page-bar">
+				<ul class="page-breadcrumb">
+					<li>
+						<i class="fa fa-home"></i>
+						<a href="{:U('Dashboard/index');}">Home</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="#">Workers</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist');}">Worker info</a>
+					</li>
+				</ul>
+			</div>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Begin: life time stats -->
+					<div class="portlet">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-shopping-cart"></i>Worker Listing
+							</div>
+							<div class="actions">
+								<a href="{:U('Worker/workernewpage');}" class="btn default yellow-stripe">
+									<i class="fa fa-plus"></i>
+									<span class="hidden-480"> New worker </span>
+								</a>
+								<div class="btn-group">
+									<a class="btn default yellow-stripe dropdown-toggle" href="javascript:;" data-toggle="dropdown">
+									<i class="fa fa-share"></i>
+									<span class="hidden-480">
+									Tools </span>
+									<i class="fa fa-angle-down"></i>
+									</a>
+									<ul class="dropdown-menu pull-right">
+										<li>
+											<a href="javascript:;">
+											Export to Excel </a>
+										</li>
+										<li>
+											<a href="javascript:;">
+											Export to CSV </a>
+										</li>
+										<li>
+											<a href="javascript:;">
+											Export to XML </a>
+										</li>
+										<li class="divider">
+										</li>
+										<li>
+											<a href="javascript:;">
+											Print Invoices </a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-container">
+								<div class="row well">
+									<form role="form" action="{:U('Worker/workerlist?type='.$type.'');}" method="post">
+									<div class="col-md-12 col-sm-12">
+										#Technologies:
+										<foreach name="teches" item="item">
+											<in name="item.techid" value="$techstr">
+												<input type="checkbox" name="techsearch[]" class="group-checkable" value="{$item.techid}" checked>{$item.content}
+											<else/>
+												<input type="checkbox" name="techsearch[]" class="group-checkable" value="{$item.techid}" >{$item.content}
+											</in>
+
+										</foreach>
+									</div>
+									<div class="col-md-12 col-sm-12">
+										<div class="dataTables_paginate paging_bootstrap_extended" id="datatable_orders_paginate">
+											#Sort conditions:
+											<select name="sortby" class="table-group-action-input form-control input-inline input-small input-sm">
+												<option value="30">income desc</option>
+												<option value="31">income asc</option>
+												<option value="10">addtime desc</option>
+												<option value="11">addtime asc</option>
+												<option value="20">remark desc</option>
+												<option value="21">remark asc</option>
+												<option value="50">projects desc</option>
+												<option value="51">projects asc</option>
+											</select>
+											<button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-search"></i> Search</button>
+											<a href="{:U('Worker/workerlist');}" class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Reset</a>
+										</div>
+									</div>
+									</form>
+								</div>
+								<div class="table-scrollable">
+									<table class="table table-striped table-bordered table-hover " id="datatable_orders">
+									<thead>
+									<tr role="row" class="heading">
+										<th width="15%">
+											 WeChat
+										</th>
+										<th >
+											 Email
+										</th>
+										<th width="15%">
+											 Technologies
+										</th>
+										<th width="5%">
+											 Remark
+										</th>
+										<th width="10%">
+											 Income
+										</th>
+										<th width="10%">
+											 Addtime
+										</th>
+										<th width="15%">
+											 Project
+										</th>
+										<th width="10%">
+											 Description
+										</th>
+										<th width="10%">
+											 Actions
+										</th>
+									</tr>
+									</thead>
+									<tbody>
+										<foreach name="workers" item="vo">
+											<tr role="row">
+												<td>
+													<i class="fa fa-dot-circle-o"></i> {$vo.wxname}
+													<br>
+													<i class="fa fa-circle-o"></i> {$vo.wxid}
+													<br>
+													<span class="badge label-danger">{$vo.attrs}</span>
+
+												</td>
+												<td>{$vo.email}</td>
+												<td>
+													<foreach name="vo.techarr" item="vv">
+														<span class="label label-sm label-success" style="margin-right:3px;">{$vv.content} </span><br>
+													</foreach>
+												</td>
+												<td>{$vo.remark}</td>
+												<td>
+													{$vo.income} RMB
+												</td>
+												<td>{$vo.addtime}</td>
+												<td>
+													<span class="label label-sm label-info">ALL projects:  {$vo.orderall}</span>
+													<br>
+													<span class="label label-sm label-success">Complete projects:  {$vo.ordercomplete}</span>
+													<br>
+													<span class="label label-sm label-danger">Doing projects:  {$vo.orderonging}</span>
+													<br>
+													<span class="label label-sm label-danger">Unpaid projects:  {$vo.orderunpaid}</span>
+
+												</td>
+												<td>{$vo.description}</td>
+												<td>
+												<a class="btn  btn-xs red" href="{:U('Worker/workereditpage?wxid='.$vo['wxid'].'');}">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a class="btn btn-xs purple" href="#confirmModal{$vo['wxid']}" data-toggle="modal">
+													<i class="fa fa-times"></i>
+												</a>
+												<a href="{:U('Worker/workerdetailpage?wxid='.$vo['wxid'].'');}" class="btn btn-xs yellow">
+													<i class="fa fa-search">
+													</i>
+												</a>
+													<div class="modal fade modal-overflow in" id="confirmModal{$vo['wxid']}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+																	<h4 class="modal-title">Delete warning</h4>
+																</div>
+																<div class="modal-body">
+																	<p>Are you sure to delete this worker?</p>
+																	<p>{$vo['wxid']} : {$vo['wxname']}</p>
+
+																</div>
+																<div class="modal-footer">
+																	<a class="btn default" data-dismiss="modal"> Cancel </a>
+																	<a href="{:U('Worker/workerdelete?wxid='.$vo['wxid'].'');}" type="button" class="btn blue"> Delete </a>
+																</div>
+															</div>
+															<!-- /.modal-content -->
+														</div>
+													<!-- /.modal-dialog -->
+													</div>
+
+												</td>
+											</tr>
+										</foreach>
+									</tbody>
+									</table>
+								</div>
+								<div class="row page">
+									{$page}
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End: life time stats -->
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+</block>
+<block name="footscript">
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/select2/select2.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<!-- END PAGE LEVEL PLUGINS -->
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script src="__PUBLIC__/metronic3_7/assets/global/scripts/metronic.js" type="text/javascript"></script>
+	<script src="__PUBLIC__/metronic3_7/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+
+	<!-- END PAGE LEVEL SCRIPTS -->
+	<script>
+			jQuery(document).ready(function() {
+           Metronic.init(); // init metronic core components
+Layout.init(); // init current layout
+			});
+		</script>
+</block>

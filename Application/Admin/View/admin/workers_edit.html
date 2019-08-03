@@ -1,0 +1,402 @@
+<extend name="public/template" />
+<block name="headerlink">
+
+
+</block>
+<block name="siderbarmenu">
+	<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+		<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+		<li class="sidebar-toggler-wrapper">
+			<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+			<div class="sidebar-toggler">
+			</div>
+			<!-- END SIDEBAR TOGGLER BUTTON -->
+		</li>
+		<!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+		<li class="sidebar-search-wrapper">
+			<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+			<!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+			<!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+			<form class="sidebar-search " action="extra_search.html" method="POST">
+				<a href="javascript:;" class="remove">
+				<i class="icon-close"></i>
+				</a>
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search...">
+					<span class="input-group-btn">
+					<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+					</span>
+				</div>
+			</form>
+			<!-- END RESPONSIVE QUICK SEARCH FORM -->
+		</li>
+		<li class="start">
+			<a href="javascript:;">
+			<i class="icon-home"></i>
+			<span class="title">Dashboard</span>
+			<span class="selected"></span>
+			<span class="arrow open"></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Dashboard/index');}">
+					<i class="icon-bar-chart"></i>
+					Default Dashboard</a>
+				</li>
+				<li>
+					<a href="{:U('Dashboard/showDataMoneyAnalysis');}">
+					<i class="icon-bar-chart"></i>
+					Data Analysis</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="icon-basket"></i>
+			<span class="title">eCommerce</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Order/showDataAnalysisPage');}">
+					<i class="icon-home"></i>
+					Dashboard</a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=2');}">
+					<i class="icon-bell"></i>
+					<span class="badge badge-danger">{$cin}</span>
+					Orders Ongoing</a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=4');}">
+					<i class="fa fa-warning"></i>
+					<span class="badge badge-danger">{$cin1}</span>
+					<font color="red">Orders Warning</font></a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=1');}">
+					<i class="fa fa-lock"></i>
+					Complete Orders</a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=3');}">
+					<i class="icon-basket"></i>
+					Orders All</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-bar-chart"></i>
+						Data Analysis
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li class="active open">
+			<a href="javascript:;">
+				<i class="fa fa-code"></i>
+				<span class="title">Workers</span>
+				<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li class="active">
+					<a href="{:U('Worker/showDataAnalysisPage');}">
+					<i class="icon-home"></i>
+					Dashboard</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerRecommandPage');}">
+						<i class="fa fa-smile-o" aria-hidden="true"></i>
+						Workers Recommand
+					</a>
+				</li>
+				<li class="active">
+					<a href="{:U('Worker/workerlist');}">
+						<i class="fa fa-list" aria-hidden="true"></i>
+						ALL Workers Workers
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist?type=4');}">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						free workers
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist?type=5');}">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						busy workers
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist?type=2');}">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						Income > 0
+					</a>
+				</li>
+				<li >
+					<a href="{:U('Worker/workerlist?type=1');}">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						Income = 0
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist?type=3');}">
+						<i class="fa fa-user-times" aria-hidden="true"></i>
+						dead workers
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-bar-chart"></i>
+						Data Analysis
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="fa fa-wrench" aria-hidden="true"></i>
+			<span class="title">Tools</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Tool/exchangeToolPage');}">
+						<i class="fa fa-exchange" aria-hidden="true"></i> Transfer Tools
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="icon-settings"></i>
+			<span class="title">Configuration</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Configure/exchangelist');}">
+						<i class="fa fa-line-chart" aria-hidden="true"></i>
+						Exchange Rate
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/techlist');}">
+						<i class="fa fa-microchip" aria-hidden="true"></i>
+						Technologies Conf
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/tradelist');}">
+						<i class="fa fa-info-circle" aria-hidden="true"></i>
+						Trade Conf
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/shortcutlistpage');}">
+						<i class="fa fa-sliders" aria-hidden="true"></i>
+						Shortcut Conf
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/tipslist');}">
+						<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+						Tips Conf
+					</a>
+				</li>
+
+			</ul>
+		</li>
+	</ul>
+</block>
+<block name="container">
+	<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<h3 class="page-title">
+			Workers <small>workers listing</small>
+			</h3>
+			<div class="page-bar">
+				<ul class="page-breadcrumb">
+					<li>
+						<i class="fa fa-home"></i>
+						<a href="{:U('Dashboard/index');}">Home</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="#">Workers</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="{:U('Worker/workerlist');}">Worker info</a>
+					</li>
+				</ul>
+				<div class="page-toolbar">
+					<div class="btn-group pull-right">
+						<button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+						Actions <i class="fa fa-angle-down"></i>
+						</button>
+						<ul class="dropdown-menu pull-right" role="menu">
+							<li>
+								<a href="#">Action</a>
+							</li>
+							<li>
+								<a href="#">Another action</a>
+							</li>
+							<li>
+								<a href="#">Something else here</a>
+							</li>
+							<li class="divider">
+							</li>
+							<li>
+								<a href="#">Separated link</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="row">
+				<div class="col-md-12 ">
+					<!-- BEGIN SAMPLE FORM PORTLET-->
+					<div class="portlet box purple ">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-gift"></i> Edit Worker
+							</div>
+							<div class="tools">
+								<a href="" class="collapse">
+								</a>
+								<a href="#portlet-config" data-toggle="modal" class="config">
+								</a>
+								<a href="" class="reload">
+								</a>
+								<a href="" class="remove">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+							<form class="form-horizontal" action="{:U('Worker/workerupdate');}" method="post"  role="form">
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-md-3 control-label">Wechat ID</label>
+										<div class="col-md-9">
+											<input type="text" name="wxid" class="form-control input-inline input-medium" placeholder="Enter wechat id" value={$worker.wxid} readonly>
+											<span class="help-inline">
+											worker's wechat id. </span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Wechat Name</label>
+										<div class="col-md-9">
+											<input type="text" name="wxname" class="form-control input-inline input-medium" placeholder="Enter wechat name" value={$worker.wxname} required>
+											<span class="help-inline"> worker's wechat name. </span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Email Address</label>
+										<div class="col-md-9">
+											<div class="input-group">
+												<span class="input-group-addon">
+												<i class="fa fa-envelope"></i>
+												</span>
+												<input type="email" name="email" class="form-control input-inline input-medium" placeholder="Email Address" value={$worker.email} required>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Technologies</label>
+										<div class="col-md-9">
+											<div class="checkbox-list">
+												<foreach name="teches" item="vo">
+													<label class="checkbox-inline">
+														<in name="vo.techid" value="$techarr">
+															<input type="checkbox" name="tech[]"  value="{$vo.techid}" checked> {$vo.content}
+														<else/>
+															<input type="checkbox" name="tech[]"  value="{$vo.techid}"> {$vo.content}
+														</in>
+													</label>
+												</foreach>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">worker attr</label>
+										<div class="col-md-9">
+											<div class="checkbox-list">
+												<foreach name="attrsche" item="vo">
+													<label class="checkbox-inline">
+														<in name="vo" value="$worker.attrs">
+															<input type="checkbox" name="attrs[]"  value="{$vo}" checked> {$vo}
+														<else/>
+															<input type="checkbox" name="attrs[]"  value="{$vo}"> {$vo}
+														</in>
+													</label>
+												</foreach>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-error">
+										<label class="col-md-3 control-label">Worker status</label>
+										<div class="col-md-9">
+											<select name="status" class="form-control input-inline input-medium">
+												<if condition="$worker.status eq 1">
+													<option value="0">live</option>
+													<option value="1" selected>dead</option>
+												<else />
+													<option value="0" selected>live</option>
+													<option value="1">dead</option>
+												</if>
+
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Textarea</label>
+										<div class="col-md-9">
+											<textarea name="description" class="form-control" rows="3">{$worker.description}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="form-actions">
+									<div class="row">
+										<div class="col-md-offset-3 col-md-9">
+											<button type="submit" class="btn green">Submit</button>
+											<a href="{:U('Worker/workerlist');}" class="btn default">Cancel</a>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- END SAMPLE FORM PORTLET-->
+					<!-- BEGIN SAMPLE FORM PORTLET-->
+
+					<!-- END SAMPLE FORM PORTLET-->
+					<!-- BEGIN SAMPLE FORM PORTLET-->
+
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+</block>
+<block name="footscript">
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/select2/select2.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<!-- END PAGE LEVEL PLUGINS -->
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script src="__PUBLIC__/metronic3_7/assets/global/scripts/metronic.js" type="text/javascript"></script>
+	<script src="__PUBLIC__/metronic3_7/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+
+	<!-- END PAGE LEVEL SCRIPTS -->
+	<script>
+			jQuery(document).ready(function() {
+           Metronic.init(); // init metronic core components
+Layout.init(); // init current layout
+			});
+		</script>
+</block>

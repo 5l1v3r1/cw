@@ -1,0 +1,989 @@
+<extend name="public/template" />
+<block name="headerlink">
+	<!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+	<link href="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+	<link href="__PUBLIC__/metronic3_7/assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
+	<link href="__PUBLIC__/metronic3_7/assets/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css"/>
+	<!-- END PAGE LEVEL PLUGIN STYLES -->
+	<!-- BEGIN PAGE STYLES -->
+	<link href="__PUBLIC__/metronic3_7/assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
+	<!-- END PAGE STYLES -->
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="__PUBLIC__/metronic3_7/assets/admin/layout/scripts/tooltip.js"></script>
+	<link href="__PUBLIC__/metronic3_7/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+	<style type="text/css">
+	.label {
+	  font-size: 0.1rem;
+	  text-anchor: middle;
+	}
+	</style>
+</block>
+<block name="siderbarmenu">
+	<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+		<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+		<li class="sidebar-toggler-wrapper">
+			<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+			<div class="sidebar-toggler">
+			</div>
+			<!-- END SIDEBAR TOGGLER BUTTON -->
+		</li>
+		<!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+		<li class="sidebar-search-wrapper">
+			<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+			<!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+			<!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+			<form class="sidebar-search " action="extra_search.html" method="POST">
+				<a href="javascript:;" class="remove">
+				<i class="icon-close"></i>
+				</a>
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search..." />
+					<span class="input-group-btn">
+					<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+					</span>
+				</div>
+			</form>
+			<!-- END RESPONSIVE QUICK SEARCH FORM -->
+		</li>
+		<li class="start active open">
+			<a href="javascript:;">
+			<i class="icon-home"></i>
+			<span class="title">Dashboard</span>
+			<span class="selected"></span>
+			<span class="arrow open"></span>
+			</a>
+			<ul class="sub-menu">
+				<li class="active">
+					<a href="{:U('Dashboard/index');}">
+					<i class="icon-bar-chart"></i>
+					Default Dashboard</a>
+				</li>
+				<li>
+					<a href="{:U('Dashboard/showDataMoneyAnalysis');}">
+					<i class="icon-bar-chart"></i>
+					Data Analysis</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="icon-basket"></i>
+			<span class="title">eCommerce</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Order/showDataAnalysisPage');}">
+					<i class="icon-home"></i>
+					Dashboard</a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=2');}">
+					<i class="icon-bell"></i>
+					<span class="badge badge-danger">{$cin}</span>
+					Orders Ongoing</a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=4');}">
+					<i class="fa fa-warning"></i>
+					<span class="badge badge-danger">{$cin1}</span>
+					<font color="red">Orders Warning</font></a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=1');}">
+					<i class="fa fa-lock"></i>
+					Complete Orders</a>
+				</li>
+				<li>
+					<a href="{:U('Order/orderlist?flag=3');}">
+					<i class="icon-basket"></i>
+					Orders All</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-bar-chart"></i>
+						Data Analysis
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+				<i class="fa fa-code"></i>
+				<span class="title">Workers</span>
+				<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Worker/showDataAnalysisPage');}">
+					<i class="icon-home"></i>
+					Dashboard</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerRecommandPage');}">
+						<i class="fa fa-smile-o" aria-hidden="true"></i>
+						Workers Recommand
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist');}">
+						<i class="fa fa-list" aria-hidden="true"></i>
+						ALL Workers Workers
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist?type=4');}">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						free workers
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist?type=5');}">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						busy workers
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist?type=2');}">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						Income > 0
+					</a>
+				</li>
+				<li >
+					<a href="{:U('Worker/workerlist?type=1');}">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						Income = 0
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Worker/workerlist?type=3');}">
+						<i class="fa fa-user-times" aria-hidden="true"></i>
+						dead workers
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-bar-chart"></i>
+						Data Analysis
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="fa fa-wrench" aria-hidden="true"></i>
+			<span class="title">Tools</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Tool/exchangeToolPage');}">
+						<i class="fa fa-exchange" aria-hidden="true"></i> Transfer Tools
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="icon-settings"></i>
+			<span class="title">Configuration</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Configure/exchangelist');}">
+						<i class="fa fa-line-chart" aria-hidden="true"></i>
+						Exchange Rate
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/techlist');}">
+						<i class="fa fa-microchip" aria-hidden="true"></i>
+						Technologies Conf
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/tradelist');}">
+						<i class="fa fa-info-circle" aria-hidden="true"></i>
+						Trade Conf
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/shortcutlistpage');}">
+						<i class="fa fa-sliders" aria-hidden="true"></i>
+						Shortcut Conf
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Configure/tipslist');}">
+						<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+						Tips Conf
+					</a>
+				</li>
+
+			</ul>
+		</li>
+
+	</ul>
+</block>
+<block name="container">
+	<div class="page-content">
+			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<!-- BEGIN STYLE CUSTOMIZER -->
+			<!-- END STYLE CUSTOMIZER -->
+			<!-- BEGIN PAGE HEADER-->
+			<div class="page-bar">
+				<ul class="page-breadcrumb">
+					<li>
+						<i class="fa fa-home"></i>
+						<a href="{:U('Dashboard/index');}">Home</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="#">Dashboard</a>
+					</li>
+				</ul>
+			</div>
+			<h3 class="page-title">
+			Dashboard <small>reports & statistics</small>
+			</h3>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN DASHBOARD STATS -->
+			<div class="row">
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="dashboard-stat blue-madison">
+						<div class="visual">
+							<i class="fa fa-comments"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								 {$cydata.revenuesum} <i class="fa fa-cny"></i>
+							</div>
+							<div class="desc">
+								 Revenues/{$todayyear}
+							</div>
+						</div>
+						<a class="more" href="javascript:;">
+						View more <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="dashboard-stat red-intense">
+						<div class="visual">
+							<i class="fa fa-bar-chart-o"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								 {$cydata.profitsum} <i class="fa fa-cny"></i>
+							</div>
+							<div class="desc">
+								 Profit/{$todayyear}
+							</div>
+						</div>
+						<a class="more" href="javascript:;">
+						View more <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="dashboard-stat green-haze">
+						<div class="visual">
+							<i class="fa fa-shopping-cart"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								 {$cin}
+							</div>
+							<div class="desc">
+								 Ongoing
+							</div>
+						</div>
+						<a class="more" href="javascript:;">
+						View more <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="dashboard-stat purple-plum">
+						<div class="visual">
+							<i class="fa fa-globe"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								 {$ongoingprofit}<i class="fa fa-cny"></i>
+							</div>
+							<div class="desc">
+								 Estimat
+							</div>
+						</div>
+						<a class="more" href="javascript:;">
+						View more <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- END DASHBOARD STATS -->
+			<div class="clearfix"></div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6">
+				<!-- BEGIN PORTLET-->
+					<div class="portlet light ">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="icon-bar-chart font-green-sharp hide"></i>
+								<span class="caption-subject font-green-sharp bold uppercase">RECENT ACTIVITIES</span>
+								<span class="caption-helper">recent activities...</span>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="scroller" style="height: 450px;" data-always-visible="1" data-rail-visible="0">
+								<ul class="feeds">
+									<li>
+									<div class="col1">
+											<div class="cont">
+												<div class="cont-col1">
+													<div class="label label-sm label-primary">
+														<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+													</div>
+												</div>
+												<div class="cont-col2">
+													<div class="desc text-primary">
+														 <strong>Please remember to send wechat friend with twitter </strong>
+													</div>
+												</div>
+											</div>
+										</div>
+										</li>
+									<foreach name="toptips" item="vo">
+											<if condition="($vo.flag eq 'warning') AND  ($vo.count neq 0)">
+												<li>
+												<div class="col1">
+														<div class="cont">
+															<div class="cont-col1">
+																<div class="label label-sm label-danger">
+																	<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+																</div>
+															</div>
+															<div class="cont-col2">
+																<div class="desc text-danger">
+																	 <strong>We have {$vo.count} orders that will beyond the deadline</strong>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col2">
+														<div class="date">
+															<a href="{:U('Order/orderlist?p=1&search=warning&flag=2');}" class="btn btn-xs red"> Action </a>
+														</div>
+													</div>
+												</li>
+											<elseif condition="($vo.flag eq 'unsetting') AND  ($vo.count neq 0)" />
+													<li>
+														<div class="col1">
+																<div class="cont">
+																	<div class="cont-col1">
+																		<div class="label label-sm label-danger">
+																			<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+																		</div>
+																	</div>
+																	<div class="cont-col2">
+																		<div class="desc text-danger">
+																			 <strong>We have {$vo.count} orders that do not arrange workers</strong>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="col2">
+																<div class="date">
+																	<a href="{:U('Order/orderlist?p=1&search=unsetting&flag=2');}" class="btn btn-xs red"> Action </a>
+																</div>
+															</div>
+														</li>
+												<elseif condition="($vo.flag eq 'nogive') AND  ($vo.count neq 0)" />
+															<li>
+																<div class="col1">
+																		<div class="cont">
+																			<div class="cont-col1">
+																				<div class="label label-sm label-danger">
+																					<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+																				</div>
+																			</div>
+																			<div class="cont-col2">
+																				<div class="desc text-danger">
+																					 <strong>We have {$vo.count} orders that have completed but not delivered to customer</strong>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col2">
+																		<div class="date">
+																			<a href="{:U('Order/orderlist?p=1&search=unsetting&flag=2');}" class="btn btn-xs red"> Action </a>
+																		</div>
+																	</div>
+																</li>
+												<elseif condition="($vo.flag eq 'paylate') AND  ($vo.count neq 0)" />
+													<li>
+														<div class="col1">
+																<div class="cont">
+																	<div class="cont-col1">
+																		<div class="label label-sm label-warning">
+																			<i class="fa fa-eye" aria-hidden="true"></i>
+																		</div>
+																	</div>
+																	<div class="cont-col2">
+																		<div class="desc text-warning">
+																			 <strong>We have {$vo.count} orders that customers aren't paid yet </strong>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="col2">
+																<div class="date">
+																	<a href="{:U('Order/orderlist?p=1&search=paylate&flag=2');}" class="btn btn-xs yellow"> Detail </a>
+																</div>
+															</div>
+														</li>
+												<elseif condition="($vo.flag eq 'unpaid') AND  ($vo.count neq 0)" />
+													<li>
+														<div class="col1">
+																<div class="cont">
+																	<div class="cont-col1">
+																		<div class="label label-sm label-info">
+																			<i class="fa fa-pie-chart" aria-hidden="true"></i>
+																		</div>
+																	</div>
+																	<div class="cont-col2">
+																		<div class="desc text-info">
+																			 <strong>We have {$vo.count} orders that aren't paid to workers yet </strong>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="col2">
+																<div class="date">
+																	<a href="{:U('Order/orderlist?p=1&search=paylate&flag=2');}" class="btn btn-xs blue"> Detail </a>
+																</div>
+															</div>
+														</li>
+												<else />
+												  <li>
+													<div class="col1">
+														<div class="cont">
+															<div class="cont-col1">
+																<div class="label label-sm label-success">
+																	<i class="fa fa-check"></i>
+																</div>
+															</div>
+															<div class="cont-col2">
+																<div class="desc text-success">
+																	 We have {$cin} ongoing tasks.
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col2">
+														<div class="date">
+															 <a href="{:U('Order/orderlist?flag=2');}" class="btn btn-xs blue"> Detail </a>
+														</div>
+													</div>
+													</li>
+												</if>
+									</foreach>
+									<foreach name="tips" item="vo">
+										<li>
+											<div class="col1">
+												<div class="cont">
+													<div class="cont-col1">
+														<div class="label label-sm label-primary">
+															<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+														</div>
+													</div>
+													<div class="cont-col2">
+														<div class="desc text-primary">
+															 {$vo.content}.
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col2">
+												<div class="date">
+													 readme
+												</div>
+											</div>
+										</li>
+
+									</foreach>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				<!-- END PORTLET-->
+			</div>
+				<div class="col-md-6 col-sm-6">
+				<!-- BEGIN PORTLET-->
+					<div class="portlet light ">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="icon-bar-chart font-green-sharp hide"></i>
+								<span class="caption-subject font-green-sharp bold uppercase"> Today's Twitter</span>
+								<span class="caption-helper">today's tweeter...</span>
+							</div>
+						</div>
+						<div class="portlet-body" heigth="430px">
+							<a class="twitter-timeline" href="https://twitter.com/xuebaCS?ref_src=twsrc%5Etfw" data-height="450" data-chrome="nofooter noborders noheader">请加我们的推特 xuebaCS </a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+						</div>
+					</div>
+				<!-- END PORTLET-->
+				</div>
+				<!-- END PORTLET-->
+				<div class="clearfix"></div>
+				<!-- END PORTLET-->
+				<div class="col-md-6 col-sm-12">
+						<div class="portlet box green">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-bar-chart-o"></i> Single Month statistic
+								</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse" data-original-title="" title="">
+									</a>
+									<a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title="">
+									</a>
+									<a href="javascript:;" class="reload" data-original-title="" title="">
+									</a>
+									<a href="javascript:;" class="remove" data-original-title="" title="">
+									</a>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<div class="row">
+									<div class="col-md-12 col-sm-12">
+										<div class="form-group">
+											<div class="col-md-5 col-sm-12">
+												<div class="input-group ">
+													<div class="input-group input-small date date-picker" data-date="{$todaymonth}" data-date-format="yyyy-mm" data-date-viewmode="years" data-date-minviewmode="months">
+														<input type="text" class="form-control " name="monthsearchinput" width="80%" value="{$todaymonth}" readonly />
+														<span class="input-group-btn">
+														<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+														</span>
+													</div>
+													<div class="input-group-btn input-large">
+														<button class="btn yellow table-group-action-submit" id="monthsearchbtn"><i class="fa fa-search"></i></button>
+													</div>
+												</div>
+
+												<!-- /input-group -->
+											</div>
+											<div class="col-md-12 col-sm-12">
+												<h4><span class="label label-info"><strong>Salary <span id="monthsalarysum"></span><i class="fa fa-rmb"></i></strong></span>  <span class="label label-danger"><strong>Profit <span id="monthprofitsum"></span><i class="fa fa-rmb"></i></strong></span>  <span class="label label-success"><strong>Revenuse <span id="monthrevenuessum"></span><i class="fa fa-rmb"></i></strong></span>  <span class="label label-info"><strong>Profit/Day <span id="monthprofitavg"></span><i class="fa fa-rmb"></i></strong></span></h4>
+											</div>
+										</div>
+									</div>
+									<div id="chart_month" class="chart" style="padding: 0px; position: relative;width:100%;height: 420px;"></div>
+								</div>
+
+							</div>
+						</div>
+				</div>
+				<div class="col-md-6 col-sm-12">
+						<div class="portlet box purple">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-bar-chart-o"></i> One Year statistic <small>12 monthes of one year</small>
+								</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse" data-original-title="" title="">
+									</a>
+									<a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title="">
+									</a>
+									<a href="javascript:;" class="reload" data-original-title="" title="">
+									</a>
+									<a href="javascript:;" class="remove" data-original-title="" title="">
+									</a>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<div class="row">
+									<div class="col-md-12 col-sm-12">
+										<div class="form-group">
+											<div class="col-md-5 col-sm-12 text-right">
+												<div class="input-group ">
+													<select class="form-control input-inline input-small" name="yearinput">
+														<option value="2018">2018</option>
+														<option value="2019" selected>2019</option>
+														<option value="2020">2020</option>
+														<option value="2021">2021</option>
+														<option value="2022">2022</option>
+														<option value="2023">2023</option>
+														<option value="2024">2024</option>
+														<option value="2025">2025</option>
+														<option value="2026">2026</option>
+														<option value="2027">2027</option>
+														<option value="2028">2028</option>
+														<option value="2029">2026</option>
+														<option value="2030">2030</option>
+													</select>
+													<button class="btn yellow table-group-action-submit" id="yearsearchbtn"><i class="fa fa-search"></i></button>
+												</div>
+												<!-- /input-group -->
+											</div>
+											<div class="col-md-12 col-sm-12 ">
+												<h4><span class="label label-info"><strong>Salary <span id="yearsalarysum"></span><i class="fa fa-rmb"></i></strong></span>  <span class="label label-danger"><strong>Profit <span id="yearprofitsum"></span><i class="fa fa-rmb"></i></strong></span>  <span class="label label-success"><strong>Revenues <span id="yearrevenuessum"></span><i class="fa fa-rmb"></i></strong></span>  </h4>
+											</div>
+										</div>
+									</div>
+									<div id="chart_year" class="chart" style="padding: 0px; position: relative;width:100%;height: 420px;">
+									</div>
+								</div>
+
+							</div>
+						</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-md-6 col-sm-12" >
+						<div class="portlet box red">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-bar-chart-o"></i> Week Hot statistic
+								</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse" data-original-title="" title="">
+									</a>
+									<a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title="">
+									</a>
+									<a href="javascript:;" class="reload" data-original-title="" title="">
+									</a>
+									<a href="javascript:;" class="remove" data-original-title="" title="">
+									</a>
+								</div>
+							</div>
+							<div class="portlet-body form" style="height: 530px;">
+								<div class="row">
+									<div id="weekchart" style="padding: 10px; position: relative;width:100%;height: 400px;"></div>
+								</div>
+
+							</div>
+						</div>
+				</div>
+
+			</div>
+			<div class="clearfix">
+			</div>
+		</div>
+</block>
+<block name="footscript">
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/select2/select2.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+	<!-- END PAGE LEVEL PLUGINS -->
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/clockface/js/clockface.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<!-- END PAGE LEVEL PLUGINS -->
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script src="__PUBLIC__/metronic3_7/assets/global/scripts/metronic.js" type="text/javascript"></script>
+	<script src="__PUBLIC__/metronic3_7/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+	<script src="__PUBLIC__/metronic3_7/assets/admin/pages/scripts/components-pickers.js"></script>
+
+	<script src="__PUBLIC__/metronic3_7/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+	<script src="__PUBLIC__/metronic3_7/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+	<script src="__PUBLIC__/metronic3_7/assets/admin/pages/scripts/components-pickers.js"></script>
+
+	<!-- END PAGE LEVEL SCRIPTS -->
+	<script>
+		jQuery(document).ready(function() {
+			Metronic.init(); // init metronic core components
+			Layout.init(); // init current layout
+			QuickSidebar.init(); // init quick sidebar
+			Demo.init(); // init demo features
+			ComponentsPickers.init();
+        });
+		/* date data */
+		function get_datedata_query(day){
+			var data = {};
+			data.daytime = day;
+			var url='__URL__/getDayData';
+			$.ajax({
+				type:"post",
+				url:url,
+				data:data,
+				dataType:"json",
+				success: function aa(data) {
+					  //showstorelist(data.stores);
+						//console.log(data);
+						showDayData(data);
+				}
+			});
+		}
+		function showDayData(data){
+			$("#dayrevenues").html("");
+			$("#daydatalist").html("");
+			$("#dayrevenues").text("  " + data.today_revenues );
+			if(data.today_alldata != null){
+				for(var i=0;i< data.today_alldata.length;i++){
+					var cell='<small><i class="fa fa-check-square-o"> </i> ' + data['today_alldata'][i].revenues + " " + data['today_alldata'][i].moneytype +  ' </small> ';
+					$("#daydatalist").append(cell);
+				}
+			}
+
+			$("#dayprofit").text("  " + data.today_profit);
+			if(data.today_salary == null){
+				data.today_salary = 0;
+			}
+			if(data.today_ordernum == null){
+				data.today_ordernum = 0;
+			}
+			$("#daysalary").text("  " + data.today_salary);
+			$("#dayordernum").text("  " + data.today_ordernum);
+		}
+		var day  = $("input[name='daysearchinput']").val();
+
+		get_datedata_query(day);
+		$("#daysearchbtn").click(function(){
+			var data = {};
+			var day = $("input[name='daysearchinput']").val();
+			get_datedata_query(day);
+			//console.log(day);
+
+		});
+		/* month data  */
+		function get_monthdata_query(day){
+			var data = {};
+			data.daytime = day;
+			var url='__URL__/getMonthData';
+			$.ajax({
+				type:"post",
+				url:url,
+				data:data,
+				dataType:"json",
+				success: function aa(data) {
+					  //showstorelist(data.stores);
+						//console.log(data);
+						drawProfitBar(data.datas,"#chart_month");
+						$("#monthsalarysum").text("  " + data.salarysum);
+						$("#monthprofitsum").text("  " + data.profitsum);
+						$("#monthrevenuessum").text("  " + data.revenuesum);
+						$("#monthprofitavg").text("  " + data.profitavg);
+						$("#monthspan").text(data.createdate);
+						//showDayData(data);
+				}
+			});
+		}
+		var month = $("input[name='monthsearchinput']").val();
+		get_monthdata_query(month);
+		$("#monthsearchbtn").click(function(){
+			var data = {};
+			var month = $("input[name='monthsearchinput']").val();
+			get_monthdata_query(month);
+			//console.log(day);
+		});
+		/* get year */
+		function get_yeardata_query(day){
+			var data = {};
+			data.daytime = day;
+			var url='__URL__/getYearData';
+			$.ajax({
+				type:"post",
+				url:url,
+				data:data,
+				dataType:"json",
+				success: function aa(data) {
+					  //showstorelist(data.stores);
+						//console.log(data);
+						drawProfitBar(data.datas,"#chart_year");
+						//drawProfitBar(data.datas);
+						$("#yearsalarysum").text("  " + data.salarysum);
+						$("#yearprofitsum").text("  " + data.profitsum);
+						$("#yearrevenuessum").text("  " + data.revenuesum);
+						//$("#yearspan").text(data.createyear);
+						//showDayData(data);
+				}
+			});
+		}
+		get_yeardata_query('2019');
+		$("#yearsearchbtn").click(function(){
+			var data = {};
+			var year = $("select[name='yearinput']").val();
+			get_yeardata_query(year)
+			//console.log(year);
+		});
+		</script>
+		<script>
+			/*
+			var data = [
+    {name:'A',count:64,description:"This is column A!"},
+    {name:'B',count:32,description:"This is column B!"},
+    {name:'C',count:16,description:"This is column C!"},
+    {name:'D',count:8,description:"This is column D!"},
+    {name:'E',count:4,description:"This is column E!"},
+    {name:'F',count:2,description:"This is column F!"},
+];*/
+function drawProfitBar(data,chartname){
+//console.log(data);
+	// Draw a basic bar chart
+	var wd = $(chartname).width();
+	var wh = $(chartname).height();
+	var margin = {top:20, left:60, bottom:70, right:20};
+	var height = wh - margin.top - margin.bottom,
+	    width = wd - margin.left - margin.right;
+  $(chartname).html("");
+	var svg = d3.select(chartname)
+	        .append("svg")
+	        .attr("height", height + margin.top + margin.bottom)
+	        .attr("width", width + margin.left + margin.right)
+	        .style("cursor","default")
+	        .append("g")
+	        .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+	var x = d3.scaleBand()
+	    .domain(data.map(function(d) { return d.createday;}))
+	    .range([0,width])
+	    .padding(.1);
+	var flagv = Math.max.apply(Math,data.map(function(o){return o.profit;}))
+	var y = d3.scaleLinear()
+	    .domain([0,flagv])
+	    .range([height,0]);
+
+	var color = d3.scaleOrdinal(d3.schemeCategory10)
+	    .domain(x.domain())
+
+
+	var tooltip = d3.tooltip() // returns the tooltip function
+	    .extent([[0,0],[width,height]]) // tells the tooltip how much area it has to work with
+	    .tips(["createday","profit","salary","revenuearray"],["CreateDate: ","Profit: ","Salary: ","Revenue: "]) // tells the tooltip which properties to display in the tip and what to label thme
+	    .fontSize(12) // sets the font size for the tooltip
+	    .padding([8,4]) // sets the amount of padding in the tooltip rectangle
+	    .margin([10,10]); // set the distance H and V to keep the tooltip from the mouse pointer
+
+	svg.selectAll(".bar")
+	    .data(data)
+	    .enter()
+	    .append("rect")
+	    .attr("x", function(d) { return x(d.createday)})
+	    .attr("y", function(d) { return y(d.profit)})
+	    .attr("width", x.bandwidth())
+	    .attr("height", function(d) { return height - y(d.profit)})
+	    .attr("fill", function(d) { return color(d.createday)})
+	    .each(tooltip.events); // attaches the tooltips mouseenter/leave/move events but does not overwrite previously attached events
+
+	svg.append("g")
+	    .attr("transform", "translate(0," + height + ")")
+	    .call(d3.axisBottom(x))
+			.selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
+
+	svg.append("g")
+	    .call(d3.axisLeft(y));
+
+	svg.call(tooltip) // draws the tooltip;
+}
+get_week_query();
+function get_week_query(){
+	var data = {};
+	var url='__URL__/getWeekData';
+	$.ajax({
+		type:"get",
+		url:url,
+		dataType:"json",
+		success: function aa(data) {
+			//console.log(data);
+			drawPieChart(data,"#weekchart","profit");
+
+		}
+	});
+}
+function drawPieChart(dataset,chartid,keyword){
+
+	//console.log(dataset);
+
+	var width = $(chartid).width();
+	var height = $(chartid).height();
+	var radius = Math.min(width, height) / 2.5;
+	var donutWidth = radius/3;
+	var legendRectSize = 18;
+	var legendSpacing = 4;
+
+	var color = d3.scaleOrdinal(d3.schemeCategory20);
+	var tooltip = d3.select(chartid)
+	.append('div')
+	.attr('class', 'tooltip');
+
+	var svg = d3.select(chartid)
+	.append('svg')
+	.attr('width', width)
+	.attr('height', height)
+	.append('g')
+	.attr('transform', 'translate(' + (width / 2) +  ',' + (height / 2) + ')');
+
+	var arc = d3.arc()
+	.innerRadius(radius - donutWidth)
+	.outerRadius(radius);
+
+	var pie = d3.pie()
+	.value(function(d) { return d[keyword]; })
+	.sort(null);
+	var label = d3.arc()
+	.outerRadius(radius + 20)
+	.innerRadius(radius + 20);
+
+	var path = svg.selectAll('path')
+	.data(pie(dataset))
+	.enter()
+	.append('path')
+	.attr('d', arc)
+	.attr('fill', function(d, i) {
+		return color(d.data.label);
+	});
+	var total = d3.sum(dataset.map(function(d) {
+	return d[keyword];
+	}));
+	svg.selectAll("text").data(pie(dataset))
+	.enter().append("text")
+	.attr("class", "label")
+	.attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
+	.attr("dy", "0.35em")
+	.text (function(d) { return d.data.label + " "+Math.round(1000 * d["data"][keyword] / total) / 10 + "%"; });
+
+	var legend = svg.selectAll('.legend')
+	.data(color.domain())
+	.enter()
+	.append('g')
+	.attr('class', 'legend')
+	.attr('transform', function(d, i) {
+	var height = legendRectSize + legendSpacing;
+	var offset =  height * color.domain().length / 2;
+	var horz = -2 * legendRectSize;
+	var vert = i * height - offset;
+	return 'translate(' + horz + ',' + vert + ')';
+	});
+
+	legend.append('rect')
+	.attr('width', legendRectSize)
+	.attr('height', legendRectSize)
+	.style('fill', color)
+	.style('stroke', color);
+
+	legend.append('text')
+	.attr('x', legendRectSize + legendSpacing)
+	.attr('y', legendRectSize - legendSpacing)
+	.text(function(d) { return d; });
+}
+
+
+
+		</script>
+</block>

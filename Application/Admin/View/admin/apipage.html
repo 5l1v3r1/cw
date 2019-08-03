@@ -1,0 +1,142 @@
+<extend name="public/template" />
+<block name="headerlink">
+	<!-- BEGIN PAGE LEVEL STYLES -->
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/metronic3_7/assets/global/plugins/select2/select2.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/metronic3_7/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-datepicker/css/datepicker.css"/>
+	<!-- END PAGE LEVEL STYLES -->
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/metronic3_7/assets/admin/pages/css/pagecode.css"/>
+</block>
+<block name="container">
+	<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Begin: life time stats -->
+					<div class="portlet">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-shopping-cart"></i>Trade need
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 ">
+								<!-- BEGIN SAMPLE FORM PORTLET-->
+								<div class="portlet box purple ">
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="fa fa-gift"></i> Trade infomation list
+										</div>
+									</div>
+									<div class="portlet-body">
+										<h4 class="block">Paypal infomation</h4>
+										<div class="well copy" id="paypal" data-clipboard-target="#paypal">
+											{$res["paypal_info"]}
+										</div>
+										<h4 class="block">Guest Remark</h4>
+										<div class="well copy1" id="remark" data-clipboard-target="#remark">
+											{$res["guest_remark"]}
+										</div>	
+										<h4 class="block">Create Group Notice</h4>
+										<div class="well copy4" id="creategroup" data-clipboard-target="#creategroup">
+											{$res["create_group"]}
+										</div>
+										<h4 class="block">Worker notice</h4>
+										<div class="well copy4" id="notice4" data-clipboard-target="#notice4" >
+											{$res["workers_notice1"]}
+										</div>
+										<h4 class="block">Worker technologies info</h4>
+										<div class="well copy2" id="techlist" data-clipboard-target="#techlist">
+											{$techinfo}{$res["worker_techlist"]}
+										</div>
+										<h4 class="block">Worker notice</h4>
+										<div class="well copy3" id="notice0" data-clipboard-target="#notice0" >
+											{$res["workers_notice0"]}
+										</div>
+									</div>
+								</div>
+								<!-- END SAMPLE FORM PORTLET-->
+								<!-- BEGIN SAMPLE FORM PORTLET-->
+
+								<!-- END SAMPLE FORM PORTLET-->
+								<!-- BEGIN SAMPLE FORM PORTLET-->
+
+							</div>
+						</div>
+						<!-- END PAGE CONTENT-->
+					</div>
+					<!-- End: life time stats -->
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+</block>
+<block name="footscript">
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/select2/select2.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/metronic3_7/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<!-- END PAGE LEVEL PLUGINS -->
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script src="__PUBLIC__/metronic3_7/assets/global/scripts/metronic.js" type="text/javascript"></script>
+	<script src="__PUBLIC__/metronic3_7/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+
+	<!-- END PAGE LEVEL SCRIPTS -->
+	<script src="__PUBLIC__/clipboard/clipboard.min.js" type="text/javascript"></script>
+	<script>
+			jQuery(document).ready(function() {
+           Metronic.init(); // init metronic core components
+           //$("#paypalalert").hide();
+Layout.init(); // init current layout
+			});
+			var clipboard = new ClipboardJS('.copy');
+			var clipboard1 = new ClipboardJS('.copy1');
+			var clipboard2 = new ClipboardJS('.copy2');
+			var clipboard3 = new ClipboardJS('.copy3');
+			var clipboard4 = new ClipboardJS('.copy4');
+
+			clipboard.on('success', function(e) {
+			    console.info('Action:', e.action);
+			    console.info('Text:', e.text);
+			    console.info('Trigger:', e.trigger);
+          //alert("lala");
+			    e.clearSelection();
+			});
+
+			clipboard1.on('success', function(e) {
+			    console.info('Action:', e.action);
+			    console.info('Text:', e.text);
+			    console.info('Trigger:', e.trigger);
+          $(".alert").show();
+          $("#alertcontent").html("Guest remark copy successfully");
+          window.setTimeout(function() {
+              $('.alert').alert('close');
+
+          }, 3000);
+			    e.clearSelection();
+			});
+			clipboard2.on('success', function(e) {
+			    console.info('Action:', e.action);
+			    console.info('Text:', e.text);
+			    console.info('Trigger:', e.trigger);
+
+			    e.clearSelection();
+			});
+			clipboard3.on('success', function(e) {
+			    console.info('Action:', e.action);
+			    console.info('Text:', e.text);
+			    console.info('Trigger:', e.trigger);
+
+			    e.clearSelection();
+			});
+			clipboard4.on('success', function(e) {
+			    console.info('Action:', e.action);
+			    console.info('Text:', e.text);
+			    console.info('Trigger:', e.trigger);
+
+			    e.clearSelection();
+			});
+
+		</script>
+</block>
