@@ -1331,3 +1331,15 @@ function getTechWorkerDatas(){
 	//$techeslist = $Tech->join('left join db_technologies on db_worker_tech.techid = db_technologies.techid')->select();
 	//print_r($techeslist);
 }
+function orderLogRecord($orderid,$op){
+  $Order = M('orders');
+  $orderinfo = $Order->join('left join db_worker_order on db_worker_order.orderid = db_orders.orderid')->join('left join db_workers on db_worker_order.wxid = db_workers.wxid')->join('left join db_guest_order on db_guest_order.orderid = db_orders.orderid')->join('left join db_guests on db_guest_order.wxid = db_guests.wxid')->field('db_orders.createtime,db_guests.wxid as gwxid,db_workers.wxid')->where('db_orders.orderid =  "'.$orderid.'"' )->find();
+  /*$orderinfostr = json_encode($orderinfo);*/
+  $data['orderid'] = $orderid;
+  $data['orderinfo'] = json_encode($orderinfo);
+  $data['op'] = $op;//
+  $data['createtime'] = date('Y-m-d H:i:s',time());//
+
+  $Model = M('security_order');
+  $Model->data($data)->add();
+}

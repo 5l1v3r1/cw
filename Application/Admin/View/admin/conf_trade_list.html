@@ -212,6 +212,25 @@
 
 			</ul>
 		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="fa fa-shield" aria-hidden="true"></i>
+			<span class="title">Security</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Security/orderRecordPage');}">
+						<i class="fa fa-list" aria-hidden="true"></i> Order Check
+					</a>
+				</li>
+				<li >
+					<a href="{:U('Security/sshRecordPage');}">
+						<i class="fa fa-user-secret" aria-hidden="true"></i> SSH Check
+					</a>
+				</li>
+			</ul>
+		</li>
 	</ul>
 </block>
 <block name="container">
@@ -346,7 +365,7 @@
 												Edit → </a>
 											</li>
 										</ul>
-										
+
 										<h4 class="block">Worker technologies info</h4>
 										<div class="well copy2" id="techlist" data-clipboard-target="#techlist">
 											{$techinfo}{$res["worker_techlist"]}

@@ -278,6 +278,8 @@ class OrderController extends CommonController {
 		//dump($data);
 		$Model = M('orders');
 		$Model->data($data)->add();
+		/* insert log_records*/
+		//orderLogRecord($orderid,"New");
 		/*guest*/
 		$cond['wxid'] = trim(I('post.guest_wxid','','htmlspecialchars'));//
 		$guest_wxid = $cond['wxid'];
@@ -510,7 +512,8 @@ class OrderController extends CommonController {
 		if(isset($_GET["flag"])){
 			$flag =I('get.flag');
 		}
-
+		/* insert log_records*/
+		orderLogRecord($orderid,"Edit");
 		//dump($orderinfo);
 		if(!empty($orderinfo)){
 			$data['projectname'] = $projectname;//
@@ -605,6 +608,8 @@ class OrderController extends CommonController {
 		}
 		$data['orderid'] = I('get.orderid');
 		$Model = M('orders');
+		/* insert log_records*/
+		orderLogRecord($data['orderid'],"DEL");
 		$Model->where($data)->delete();
 		/*if(isset($_GET["go"]) && $_GET["go"] == 1){
 			//$this->error('Update order #'.$orderid.' failure!',U('Order/orderlist_ongoing'),1);

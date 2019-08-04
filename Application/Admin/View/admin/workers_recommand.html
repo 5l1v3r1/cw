@@ -109,7 +109,7 @@
 				<span class="arrow "></span>
 			</a>
 			<ul class="sub-menu">
-				<li class="active">
+				<li>
 					<a href="{:U('Worker/showDataAnalysisPage');}">
 					<i class="icon-home"></i>
 					Dashboard</a>
@@ -218,6 +218,25 @@
 
 			</ul>
 		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="fa fa-shield" aria-hidden="true"></i>
+			<span class="title">Security</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Security/orderRecordPage');}">
+						<i class="fa fa-list" aria-hidden="true"></i> Order Check
+					</a>
+				</li>
+				<li >
+					<a href="{:U('Security/sshRecordPage');}">
+						<i class="fa fa-user-secret" aria-hidden="true"></i> SSH Check
+					</a>
+				</li>
+			</ul>
+		</li>
 	</ul>
 </block>
 <block name="container">
@@ -311,7 +330,7 @@
 														<span class="label label-sm label-success"><small>Complete</small></span>
 														<span class="label label-sm label-danger"><small>Ongoing</small></span>
 														<span class="label label-sm label-warning"><small>Unpaid</small></span>
-														
+
 													</div>
 													<div class="tools">
 														<span >Mark </span><i class="fa fa-sort-numeric-desc" aria-hidden="true" id= "ShowOlderByMarkDesc"></i>  <i class="fa fa-sort-numeric-asc" id= "ShowOlderByMarkAsc" aria-hidden="true"></i>
@@ -469,49 +488,49 @@
 										var datas = event.data;
 										datas.sort(cmpdateDESC);
 									    showOldWorkers(datas,"#oldworkernum","#ShowOldWorkers");
-										
+
 									}) ;
 									$('#ShowOlderByDateAsc').click(data[0],function(event){
 										var datas = event.data;
 										datas.sort(cmpdate);
 									    showOldWorkers(datas,"#oldworkernum","#ShowOldWorkers");
-										
+
 									}) ;
 									$('#ShowOlderByMarkDesc').click(data[0],function(event){
 										var datas = event.data;
 										datas.sort(cmpmarkDESC);
 									    showOldWorkers(datas,"#oldworkernum","#ShowOldWorkers");
-										
+
 									}) ;
 									$('#ShowOlderByMarkAsc').click(data[0],function(event){
 										var datas = event.data;
 										datas.sort(cmpmark);
 									    showOldWorkers(datas,"#oldworkernum","#ShowOldWorkers");
-										
+
 									}) ;
 									$('#ShowNewByMarkDesc').click(data[1],function(event){
 										var datas = event.data;
 										datas.sort(cmpmarkDESC);
 									    showNewWorkers(datas,"#newworkernum","#ShowNewWorkers");
-										
+
 									}) ;
 									$('#ShowNewByMarkAsc').click(data[1],function(event){
 										var datas = event.data;
 										datas.sort(cmpmark);
 									    showNewWorkers(datas,"#newworkernum","#ShowNewWorkers");
-										
+
 									}) ;
 									$('#ShowNewByDateDesc').click(data[1],function(event){
 										var datas = event.data;
 										datas.sort(cmpdateDESC);
 									    showNewWorkers(datas,"#newworkernum","#ShowNewWorkers");
-										
+
 									}) ;
 									$('#ShowNewByDateAsc').click(data[1],function(event){
 										var datas = event.data;
 										datas.sort(cmpdate);
 									    showNewWorkers(datas,"#newworkernum","#ShowNewWorkers");
-										
+
 									}) ;
 								},
 								error: function(xhr, status, error) {
@@ -576,7 +595,7 @@
 								}else{
 									techspans = techspans + '<small> <i class="fa fa-circle '+ attrclass +'" aria-hidden="true"></i><span '+spanclass+'> '+ data[i].techarr[j].content + '</span></small>';
 								}
-								
+
 							}
 								var trc = '\
 <td><small><i class="fa fa-paperclip"></i> '+ (i+1) +'\
@@ -620,7 +639,7 @@
 								}else{
 									techspans = techspans + '<small> <i class="fa fa-circle '+ attrclass +'" aria-hidden="true"></i><span '+spanclass+'> '+ data[i].techarr[j].content + '</span></small>';
 								}
-								
+
 							}
 							var trc = '\
 <td><small><i class="fa fa-paperclip"></i> '+ (i+1) +'\
@@ -641,17 +660,17 @@
 				}
 /*pay method */
 			$("input[name='moneytype']").val("RMB");
-			$("input[name='paymethod']").bind("click",function(){  
+			$("input[name='paymethod']").bind("click",function(){
 				var moneytype = "RMB";
 				if($(this).val() == "Paypal"){
 					moneytype = "USD";
 				}
-				
+
 				$("input[name='moneytype']").val(moneytype);
-				//测试操作代码  
-				//alert($(this).val());  
-				
-			});  
+				//测试操作代码
+				//alert($(this).val());
+
+			});
 			function cmpmark(a, b){
 				return a.mark_sum-b.mark_sum;
 			}
@@ -667,7 +686,7 @@
     			return dateB-dateA; //sort by date ascending
 			}
 
-			
+
 
 			</script>
 </block>

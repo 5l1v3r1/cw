@@ -348,8 +348,18 @@ class WorkerController extends CommonController {
     public function workerdelete(){
     	$data_['wxid'] = I('get.wxid');
     	$Model = M('workers');
-    	$Model->where($data_)->delete();
-    	$this->success('Worker has deleted successfully!', U('Worker/workerlist'),2);
+      $workerinfo = $Model->where($data_)->find();
+      if(!empty($workerinfo)){
+  			//echo "nonull";
+  			$cell['status'] = 1;//
+  			$Model->where($data_)->save($cell);
+        $this->success('Worker has deleted successfully!', U('Worker/workerlist'),2);
+      }else
+      {
+        $this->error('Worker has deleted failed!', U('Worker/workerlist'),2);
+      }
+    	//$Model->where($data_)->delete();
+
 
     }
     /* view worker detail */
