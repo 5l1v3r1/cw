@@ -50,13 +50,19 @@ class DashboardController extends CommonController {
         $searchcon["wdong"]= 'AND (db_worker_order.w_state = 1 )';//wdoing   info
         $toptips = array();
         foreach($searchcon  as $k=>$v){
-            //$cell = array();
+            $cell = array();
             $cell["flag"] = $k;
             $cell["count"] = 0;
             $cell["count"] = $Model->join('left join db_worker_order on db_worker_order.orderid = db_orders.orderid')->join('left join db_workers on db_worker_order.wxid = db_workers.wxid')->join('left join db_guest_order on db_guest_order.orderid = db_orders.orderid')->join('left join db_guests on db_guest_order.wxid = db_guests.wxid')->where('(db_guest_order.g_state != 2 OR db_worker_order.w_state != 3) '.$v)->count();
             array_push($toptips,$cell);
-        }
-        //print_r($toptips);
+	}
+	$cell = array();
+	$Msecurity = M('security_ssh');
+	$cell["flag"] = "ssh_check";
+	$cell["count"] = $Msecurity->where("now() >= date_sub(createtime,interval 24 hour) AND now()<= date_add(createtime,interval 24 hour) ")->count();
+	//print_r($toptips);
+	array_push($toptips,$cell);
+	//print_r($toptips);
         $this->assign('toptips',$toptips);
         /*tips*/
         $Model = M('configure_tips');

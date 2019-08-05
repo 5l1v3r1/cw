@@ -83,8 +83,8 @@ class OrderController extends CommonController {
 			}
 			else{
 
-				$se_condition = 'AND (db_guests.wxid Like "%'.$search.'%" OR db_guests.wxname Like "%'.$search.'%" OR db_workers.wxid like "%'.$search.'%" OR db_workers.wxname Like "%'.$search.'%")';
-				$se_conditionall = '(db_guests.wxid Like "%'.$search.'%" OR db_guests.wxname Like "%'.$search.'%" OR db_workers.wxid like "%'.$search.'%" OR db_workers.wxname Like "%'.$search.'%")';
+				$se_condition = 'AND (db_orders.orderid Like "%'.$search.'%" OR db_guests.wxid Like "%'.$search.'%" OR db_guests.wxname Like "%'.$search.'%" OR db_workers.wxid like "%'.$search.'%" OR db_workers.wxname Like "%'.$search.'%")';
+				$se_conditionall = '(db_orders.orderid Like "%'.$search.'%" OR db_guests.wxid Like "%'.$search.'%" OR db_guests.wxname Like "%'.$search.'%" OR db_workers.wxid like "%'.$search.'%" OR db_workers.wxname Like "%'.$search.'%")';
 			}
 
 			// 赋值分页输出

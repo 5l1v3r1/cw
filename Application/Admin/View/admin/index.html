@@ -242,6 +242,25 @@
 				</li>
 			</ul>
 		</li>
+		<li>
+			<a href="javascript:;">
+			<i class="fa fa-shield" aria-hidden="true"></i>
+			<span class="title">Finance</span>
+			<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{:U('Finance/assetsPage');}">
+						<i class="fa fa-list" aria-hidden="true"></i> Assets Managerment
+					</a>
+				</li>
+				<li >
+					<a href="{:U('Security/sshRecordPage');}">
+						<i class="fa fa-user-secret" aria-hidden="true"></i> SSH Check
+					</a>
+				</li>
+			</ul>
+		</li>
 
 	</ul>
 </block>
@@ -398,7 +417,8 @@
 														</div>
 													</div>
 												</li>
-											<elseif condition="($vo.flag eq 'unsetting') AND  ($vo.count neq 0)" />
+											</if>
+											<if condition="($vo.flag eq 'unsetting') AND  ($vo.count neq 0)" >
 													<li>
 														<div class="col1">
 																<div class="cont">
@@ -420,7 +440,8 @@
 																</div>
 															</div>
 														</li>
-												<elseif condition="($vo.flag eq 'nogive') AND  ($vo.count neq 0)" />
+												</if>
+												<if condition="($vo.flag eq 'nogive') AND  ($vo.count neq 0)" >
 															<li>
 																<div class="col1">
 																		<div class="cont">
@@ -442,7 +463,8 @@
 																		</div>
 																	</div>
 																</li>
-												<elseif condition="($vo.flag eq 'paylate') AND  ($vo.count neq 0)" />
+												</if>
+												<if condition="($vo.flag eq 'paylate') AND  ($vo.count neq 0)" >
 													<li>
 														<div class="col1">
 																<div class="cont">
@@ -453,7 +475,7 @@
 																	</div>
 																	<div class="cont-col2">
 																		<div class="desc text-warning">
-																			 <strong>We have {$vo.count} orders that customers aren't paid yet </strong>
+																			 <strong>We have {$vo.count} orders that customers aren't paid for remaining money yet </strong>
 																		</div>
 																	</div>
 																</div>
@@ -464,7 +486,8 @@
 																</div>
 															</div>
 														</li>
-												<elseif condition="($vo.flag eq 'unpaid') AND  ($vo.count neq 0)" />
+												</if>
+												<if condition="($vo.flag eq 'unpaid') AND  ($vo.count neq 0)" >
 													<li>
 														<div class="col1">
 																<div class="cont">
@@ -475,7 +498,7 @@
 																	</div>
 																	<div class="cont-col2">
 																		<div class="desc text-info">
-																			 <strong>We have {$vo.count} orders that aren't paid to workers yet </strong>
+																			 <strong>We have {$vo.count} completed orders that aren't paid to workers yet </strong>
 																		</div>
 																	</div>
 																</div>
@@ -486,30 +509,52 @@
 																</div>
 															</div>
 														</li>
-												<else />
-												  <li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-success">
-																	<i class="fa fa-check"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc text-success">
-																	 We have {$cin} ongoing tasks.
-																</div>
-															</div>
+												</if>
+												<if condition="($vo.flag eq 'ssh_check') AND  ($vo.count neq 0)" >
+													<li>
+														<div class="col1">
+														      <div class="cont">
+														              <div class="cont-col1">
+														                      <div class="label label-sm " style="background-color:#9b59b6">
+														<i class="fa fa-user-secret" aria-hidden="true"></i>
+														                      </div>
+														              </div>
+														              <div class="cont-col2">
+														                      <div class="desc" style="color:#9b59b6">
+														<strong>Recently there is {$vo.count} ssh login record, which may be abnormal.</strong>
+														                      </div>
+														              </div>
+														      </div>
 														</div>
-													</div>
-													<div class="col2">
-														<div class="date">
-															 <a href="{:U('Order/orderlist?flag=2');}" class="btn btn-xs blue"> Detail </a>
-														</div>
-													</div>
+										        <div class="col2">
+										                <div class="date">
+										                        <a href="{:U('Security/sshRecordPage');}" class="btn btn-xs purple"> Detail </a>
+										                </div>
+										        </div>
 													</li>
 												</if>
 									</foreach>
+										 <li>
+											<div class="col1">
+												<div class="cont">
+													<div class="cont-col1">
+														<div class="label label-sm label-success">
+															<i class="fa fa-check"></i>
+														</div>
+													</div>
+													<div class="cont-col2">
+														<div class="desc text-success">
+															We have {$cin} ongoing tasks.
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col2">
+												<div class="date">
+													<a href="{:U('Order/orderlist?flag=2');}" class="btn btn-xs blue"> Detail </a>
+												</div>
+											</div>
+										</li>
 									<foreach name="tips" item="vo">
 										<li>
 											<div class="col1">
