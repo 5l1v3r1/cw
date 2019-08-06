@@ -184,20 +184,20 @@ function getYearData($year){
         array_push($datas ,$room);
 	}
 	$res["createyear"] = $year;
-	$res["salarysum"] = $salarysum;
-	$res["revenuesum"]=$revenuesum;
-    $res["moneyinfo"] = $year_revenuescc;
-	$res["profitsum"]=($revenuesum - $salarysum);
-    $res["ordernum"] = $year_ordernum;
-    if($daystep == 0){
-        $res["profitavg"] = 0;
-        $res["ordernumavg"] = 0;
-    }else{
-        $res["profitavg"] = round($res["profitsum"]/$daystep, 3);
-        $res["ordernumavg"] = round($res["ordernum"]/$daystep, 3);
-    }
+	$res["salarysum"] = round($salarysum,3);
+	$res["revenuesum"]=round($revenuesum,3);
+  $res["moneyinfo"] =round( $year_revenuescc,3);
+	$res["profitsum"]=round(($revenuesum - $salarysum),3);
+  $res["ordernum"] = $year_ordernum;
+  if($daystep == 0){
+      $res["profitavg"] = 0;
+      $res["ordernumavg"] = 0;
+  }else{
+      $res["profitavg"] = round($res["profitsum"]/$daystep, 3);
+      $res["ordernumavg"] = round($res["ordernum"]/$daystep, 3);
+  }
 
-    $res["daystep"] = $daystep;
+  $res["daystep"] = $daystep;
 	$res["datas"] = $datas;
 	return $res;
 }

@@ -20,7 +20,7 @@ class FinanceController extends CommonController {
 			$assets[$k] = $v;
 			$account_sum = $v["amount"] * $item['rating'] + $account_sum;
 			$interest_sum = $interest_sum + $v["interest"];
-			
+
 		}
 		$total["account"] = $account_sum;
 		$total["interest"] = $interest_sum;
@@ -72,6 +72,7 @@ class FinanceController extends CommonController {
 		$data['year_rate'] = I('post.yearrate');//sort id docurls
 		$data['startdate'] = I('post.startdate');//sort id
 		$data['enddate'] = I('post.enddate');
+		$data['attr'] = I('post.attr');
 		$data['description'] = I('post.description');
 
 		$Model = M('finance_assets');
@@ -86,7 +87,7 @@ class FinanceController extends CommonController {
 	}
 	public function getAssetsPercent(){
 		$type = I('post.type','','htmlspecialchars');//;
-		$type = "bank";
+		//$type = "bank";
 		$M = M('finance_assets');
 		$types = $M->field($type)->group($type)->select();
 		$dataset = [];
@@ -118,6 +119,7 @@ class FinanceController extends CommonController {
 			//echo "<br>";
 			//echo $v[$type];
 		}
+		//print_r($dataset);
 		/*$dataset = [];
 		foreach($res as $k=>$v){
 			//$room = [];
