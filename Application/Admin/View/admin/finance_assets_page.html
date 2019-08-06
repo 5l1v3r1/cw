@@ -276,7 +276,7 @@
 					</div>
 					<!-- End: life time stats -->
 				</div>
-				<div class="col-md-6 col-sm-6" style="height: 580px;">
+				<div class="col-md-8 col-sm-8" style="height: 580px;">
 				<!-- BEGIN PORTLET-->
 					<div class="portlet light ">
 						<div class="portlet-title">
@@ -289,7 +289,7 @@
 						<div class="portlet-body"  >
 							<div class="portlet-body">
 								<div class="row static-info">
-									<h4>Total datas table</h4>
+									<h4>Assets List</h4>
 									<div class="table-scrollable">
 
 										<table class="table table-hover">
@@ -299,63 +299,94 @@
 												 #
 											</th>
 											<th>
-												 Revenues
+												 Assets Name
 											</th>
 											<th>
-												 Profit
+												 Bank
 											</th>
 											<th>
-												 Salary
+												 Amount
 											</th>
 											<th>
-												 No.Orders
+												 Rate(%)
+											</th>
+											<th>
+												 Date Range
+											</th>
+											<th>
+												 CreatDate
+											</th>
+											<th>
+												 Description
+											</th>
+											<th>
+												 Operation
 											</th>
 										</tr>
 										</thead>
 										<tbody>
-										<foreach name="datas" item="vo">
-											<if condition="$vo.createyear eq 'Total' ">
-												<tr class="danger">
-													<td>
-														 {$vo.createyear}
-													</td>
-													<td>
-														 {$vo.revenuesum}
-														<br>
-														<foreach name="revenuesarr" item="vi">
-															 <small><i class="fa fa-check-square-o"></i> {$vi['revenues']} {$vi['moneytype']} </small>
-															 <br>
-														</foreach>
-													</td>
-													<td>
-														 {$vo.profitsum}
-													</td>
-													<td>
-														{$vo.salarysum}
-													</td>
-													<td>
-														{$vo.ordernum}
-													</td>
-												</tr>
-											<else />
-												<tr>
-													<td>
-														 {$vo.createyear}
-													</td>
-													<td>
-														 {$vo.revenuesum}
-													</td>
-													<td>
-														 {$vo.profitsum}
-													</td>
-													<td>
-														{$vo.salarysum}
-													</td>
-													<td>
-														{$vo.ordernum}
-													</td>
-												</tr>
-											</if>
+										<foreach name="assets" item="vo">
+											<tr>
+												<td>
+													 {$vo.id}
+												</td>
+												<td>
+													 {$vo.name}
+												</td>
+												<td>
+													 {$vo.bank}
+												</td>
+												<td>
+													 {$vo.amount}{$vo.moneytype}
+												</td>
+												<td>
+													 {$vo.year_rate}
+												</td>
+												<td>
+													{$vo.startdate} - {$vo.enddate}
+												</td>
+												<td>
+													{$vo.createtime}
+												</td>
+												<td>
+													{$vo.description}
+												</td>
+												<td>
+													<a class="btn  btn-xs red" href="{:U('Finance/editAssetsPage?id='.$vo['id'].'');}">
+														<i class="fa fa-edit"></i>
+													</a>
+													<a class="btn btn-xs purple" href="#confirmModal{$vo['id']}" data-toggle="modal">
+														<i class="fa fa-times"></i>
+													</a>
+													<div class="modal fade modal-overflow in" id="confirmModal{$vo['id']}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+																	<h4 class="modal-title">Delete warning</h4>
+																</div>
+																<div class="modal-body">
+																	<p>Are you sure to delete this Assets?</p>
+																	<p>ID: {$vo['id']}</p>
+																	<p>Name : {$vo['name']}</p>
+																	<p>Bank : {$vo['bank']}</p>
+																	<p>Amount : {$vo.amount}{$vo.moneytype}</p>
+																	<p>Rate : {$vo.year_rate}</p>
+																	<p>Date Range : {$vo.startdate} - {$vo.enddate}</p>
+
+																</div>
+																<div class="modal-footer">
+																	<a class="btn default" data-dismiss="modal"> Cancel </a>
+																	<a href="{:U('Finance/delassets?id='.$vo['id'].'');}" type="button" class="btn blue"> Delete </a>
+																</div>
+															</div>
+															<!-- /.modal-content -->
+														</div>
+													<!-- /.modal-dialog -->
+													</div>
+
+												</td>
+											</tr>
 
 										</foreach>
 

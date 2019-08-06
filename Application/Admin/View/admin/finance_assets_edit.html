@@ -286,12 +286,12 @@
 							</div>
 						</div>
 						<div class="portlet-body form">
-							<form class="form-horizontal" action="{:U('Finance/addAssets');}" method="post"  role="form">
+							<form class="form-horizontal" action="{:U('Finance/editAssets');}" method="post"  role="form">
                 <div class="form-body">
 									<div class="form-group has-error">
 										<label class="col-md-3 control-label">Assets Name</label>
 										<div class="col-md-9">
-											<input name="name" type="text"  class="form-control input-inline input-medium" required />
+											<input name="name" type="text"  class="form-control input-inline input-medium" value="{$assets.name}"required />
 											<span class="help-inline"> Assets Name </span>
 										</div>
 									</div>
@@ -300,14 +300,79 @@
 										<div class="col-md-9">
 											<div class="checkbox-list">
 												<select name="bank" class="form-control input-inline input-large">
-													<option value="ICBC">工商银行</option>
-													<option value="CMB">招商银行</option>
-													<option value="BOC">中国银行</option>
-													<option value="CMBC">民生银行</option>
-													<option value="CCB">建设银行</option>
-													<option value="CZCB">稠州银行</option>
-													<option value="paypal">paypal</option>
-													<option value="alipay">alipay</option>
+													<if condition="$assets.bank eq 'ICBC' ">
+														<option value="ICBC" selected>工商银行</option>
+														<option value="CMB">招商银行</option>
+														<option value="BOC">中国银行</option>
+														<option value="CMBC">民生银行</option>
+														<option value="CCB">建设银行</option>
+														<option value="CZCB">稠州银行</option>
+														<option value="paypal">paypal</option>
+														<option value="alipay">alipay</option>
+													<elseif condition="$assets.bank eq 'CMB'"/>
+														<option value="CMB" selected>招商银行</option>
+														<option value="ICBC">工商银行</option>
+														<option value="BOC">中国银行</option>
+														<option value="CMBC">民生银行</option>
+														<option value="CCB">建设银行</option>
+														<option value="CZCB">稠州银行</option>
+														<option value="paypal">paypal</option>
+														<option value="alipay">alipay</option>
+													<elseif condition="$assets.bank eq 'BOC'"/>
+														<option value="BOC" selected>中国银行</option>
+														<option value="ICBC">工商银行</option>
+														<option value="CMB">招商银行</option>
+														<option value="CMBC">民生银行</option>
+														<option value="CCB">建设银行</option>
+														<option value="CZCB">稠州银行</option>
+														<option value="paypal">paypal</option>
+														<option value="alipay">alipay</option>
+													<elseif condition="$assets.bank eq 'CMBC'"/>
+														<option value="CMBC" selected>民生银行</option>
+														<option value="ICBC">工商银行</option>
+														<option value="CMB">招商银行</option>
+														<option value="BOC">中国银行</option>
+														<option value="CCB">建设银行</option>
+														<option value="CZCB">稠州银行</option>
+														<option value="paypal">paypal</option>
+														<option value="alipay">alipay</option>
+													<elseif condition="$assets.bank eq 'CCB'"/>
+														<option value="CCB" selected>建设银行</option>
+														<option value="ICBC">工商银行</option>
+														<option value="CMB">招商银行</option>
+														<option value="BOC">中国银行</option>
+														<option value="CMBC">民生银行</option>
+														<option value="CZCB">稠州银行</option>
+														<option value="paypal">paypal</option>
+														<option value="alipay">alipay</option>
+													<elseif condition="$assets.bank eq 'CZCB'"/>
+														<option value="CZCB" selected>稠州银行</option>
+														<option value="ICBC">工商银行</option>
+														<option value="CMB">招商银行</option>
+														<option value="BOC">中国银行</option>
+														<option value="CMBC">民生银行</option>
+														<option value="CCB">建设银行</option>
+														<option value="paypal">paypal</option>
+														<option value="alipay">alipay</option>
+													<elseif condition="$assets.bank eq 'paypal'"/>
+														<option value="paypal" selected>paypal</option>
+														<option value="ICBC">工商银行</option>
+														<option value="CMB">招商银行</option>
+														<option value="BOC">中国银行</option>
+														<option value="CMBC">民生银行</option>
+														<option value="CCB">建设银行</option>
+														<option value="CZCB">稠州银行</option>
+														<option value="alipay">alipay</option>
+													<elseif condition="$assets.bank eq 'alipay'"/>
+														<option value="alipay" selected>alipay</option>
+														<option value="ICBC">工商银行</option>
+														<option value="CMB">招商银行</option>
+														<option value="BOC">中国银行</option>
+														<option value="CMBC">民生银行</option>
+														<option value="CCB">建设银行</option>
+														<option value="CZCB">稠州银行</option>
+														<option value="paypal">paypal</option>
+													</if>
 												</select>
 											</div>
 										</div>
@@ -317,8 +382,13 @@
 										<div class="col-md-9">
 											<div class="checkbox-list">
 												<select name="moneytype" class="form-control input-inline input-large">
-													<option value="USD">USD</option>
-													<option value="RMB">RMB</option>
+													<if condition="$assets.moneytype eq 'USD' ">
+														<option value="USD" selected>USD</option>
+														<option value="RMB">RMB</option>
+													<else/>
+														<option value="RMB" selected>RMB</option>
+														<option value="USD">USD</option>
+													</if>
 												</select>
 											</div>
 										</div>
@@ -326,20 +396,20 @@
 									<div class="form-group has-error">
 										<label class="col-md-3 control-label">Amount</label>
 										<div class="col-md-9">
-											<input name="amount" type="number" value="0.00" min="0" step="0.01" class="form-control input-inline input-medium" required>
+											<input name="amount" type="number" value="0.00" min="0" step="0.01" class="form-control input-inline input-medium" value = "{$assets.amount}" required>
 										</div>
 									</div>
 									<div class="form-group has-error">
 										<label class="col-md-3 control-label">Year Rate(%)</label>
 										<div class="col-md-9">
-											<input name="yearrate" type="number" value="0.00" min="0" step="0.01" class="form-control input-inline input-medium" required>
+											<input name="yearrate" type="number" value="0.00" min="0" step="0.01" class="form-control input-inline input-medium" value = "{$assets.year_rate}" required>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-3 control-label">Date Zone</label>
 										<div class="col-md-3">
 											<div class="input-group input-large date-picker input-daterange" data-date="{$dateform}" data-date-format="yyyy-mm-dd">
-												<input name="startdate" type="text" class="form-control" required/>
+												<input name="startdate" type="text" class="form-control" value="{$assets.startdate}" required/>
 												<span class="input-group-addon">
 												to </span>
 												<input name="enddate" type="text" class="form-control" required/>
