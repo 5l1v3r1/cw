@@ -299,7 +299,7 @@
 												 #
 											</th>
 											<th>
-												 Assets Name
+												 Assets
 											</th>
 											<th>
 												 Bank
@@ -311,13 +311,16 @@
 												 Rate(%)
 											</th>
 											<th>
-												 Date Range
+												 DateRange
+											</th>
+											<th>
+												 Interest
 											</th>
 											<th>
 												 CreatDate
 											</th>
 											<th>
-												 Description
+												 Des
 											</th>
 											<th>
 												 Operation
@@ -334,22 +337,26 @@
 													 {$vo.name}
 												</td>
 												<td>
-													 {$vo.bank}
+													 <small>{$vo.bank}<br>{$vo.attr}</small>
 												</td>
 												<td>
-													 {$vo.amount}{$vo.moneytype}
+													 <small>{$vo.amount}{$vo.moneytype}</small>
 												</td>
 												<td>
-													 {$vo.year_rate}
+													 <small>{$vo.year_rate}</small>
 												</td>
 												<td>
-													{$vo.startdate} - {$vo.enddate}
+													<small>{$vo.startdate}</small><br><small>{$vo.enddate}</small>
 												</td>
 												<td>
-													{$vo.createtime}
+													<small>	{$vo.interest}</small>
 												</td>
 												<td>
-													{$vo.description}
+													<small>	{$vo.createtime}</small>
+												</td>
+
+												<td>
+													<small>{$vo.description}</small>
 												</td>
 												<td>
 													<a class="btn  btn-xs red" href="{:U('Finance/editAssetsPage?id='.$vo['id'].'');}">

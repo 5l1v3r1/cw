@@ -309,7 +309,7 @@ class ConfigureController extends CommonController {
 		$Model->where($cond)->delete();
 		$this->success('Delete tips successfully!',U('Configure/tipslist'),1);
 	}
-	
+
 	public function shortcutlistpage(){
 		/*$Model = M('auth_rule');
 		$items = $Model->select();
@@ -455,6 +455,6 @@ class ConfigureController extends CommonController {
 		$this->ajaxReturn($res);
 
 	}
-	
+
 
 }
