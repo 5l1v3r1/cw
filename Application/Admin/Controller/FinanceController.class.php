@@ -5,15 +5,28 @@ class FinanceController extends CommonController {
 	public function assetsPage(){
 		$Model = M('finance_assets');
 		$assets = $Model ->select();
+		$total = array();
+		$account_sum = 0;
+		$interest_sum = 0;
 		foreach($assets as $k=>$v){
 			$datetime_start = new \DateTime($v["startdate"]);
-	    $datetime_end = new \DateTime($v["enddate"]);
+			$datetime_end = new \DateTime($v["enddate"]);
 			$daystep = $datetime_start->diff($datetime_end)->days + 1;
 			//print($daystep);
-			$v["interest"] = round($v["amount"] * ($v["year_rate"] * 0.01/365) *$daystep,3);
+			$ME = M('configure_exchange');
+			$cc['currency'] = $v['moneytype'];
+			$item = $ME->where($cc)->find();
+			$v["interest"] = round($v["amount"] * $item['rating']* ($v["year_rate"] * 0.01/365) *$daystep,3);
 			$assets[$k] = $v;
+			$account_sum = $v["amount"] * $item['rating'] + $account_sum;
+			$interest_sum = $interest_sum + $v["interest"];
+			
 		}
+		$total["account"] = $account_sum;
+		$total["interest"] = $interest_sum;
+		$total["total"] = $account_sum + $interest_sum;
 		//print_r($assets[$k]);
+		$this->assign('total',$total);
 		$this->assign('assets',$assets);
 		$this->display(T('admin/finance_assets_page'));
 
@@ -71,6 +84,50 @@ class FinanceController extends CommonController {
 		$Model->where($cond)->delete();
 		$this->success('Delete Assets successfully!',U('Finance/assetsPage'),1);
 	}
+	public function getAssetsPercent(){
+		$type = I('post.type','','htmlspecialchars');//;
+		$type = "bank";
+		$M = M('finance_assets');
+		$types = $M->field($type)->group($type)->select();
+		$dataset = [];
+		foreach($types as $k=>$v){
+			//print_r($v);
+			$cond = [];
+			$cond[$type] = $v[$type];
+			$assets = $M->where($cond)->select();
+			$account_sum = 0;
+			$interest_sum = 0;
+			foreach($assets as $k=>$v){
+				$datetime_start = new \DateTime($v["startdate"]);
+				$datetime_end = new \DateTime($v["enddate"]);
+				$daystep = $datetime_start->diff($datetime_end)->days + 1;
+				//print($daystep);
+				$ME = M('configure_exchange');
+				$cc['currency'] = $v['moneytype'];
+				$item = $ME->where($cc)->find();
+				$v["interest"] = round($v["amount"] * $item['rating']* ($v["year_rate"] * 0.01/365) *$daystep,3);
+				$assets[$k] = $v;
+				$account_sum = $v["amount"] * $item['rating'] + $account_sum;
+				$interest_sum = $interest_sum + $v["interest"];
 
+			}
+			$room["label"] = $v[$type];
+			$room["count"] =  $account_sum + $interest_sum;
+			array_push($dataset,$room);
+			//print_r($room);
+			//echo "<br>";
+			//echo $v[$type];
+		}
+		/*$dataset = [];
+		foreach($res as $k=>$v){
+			//$room = [];
+			//echo $v;
+			$room["label"] =  $v["month"];
+			$room["count"] =  $v[$fy];
+			//$room["profit"] =  $year_profitarray[$v["label"]];
+			array_push($dataset,$room);
+		}*/
+		$this->ajaxReturn($dataset);
+	}
 
 }

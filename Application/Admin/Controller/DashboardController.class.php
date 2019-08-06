@@ -28,7 +28,7 @@ class DashboardController extends CommonController {
         $this->assign('ongoingunpaid',$res[10]);
         $this->assign('ongoingdoing',$res[11]);
         $this->assign('ongoingunset',$res[12]);
-    		$this->assign('unpaidsalary',$res[13]);
+    	$this->assign('unpaidsalary',$res[13]);
 
 
         $this->assign('cydata',$cydata);//current day data info

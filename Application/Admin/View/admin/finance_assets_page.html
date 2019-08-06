@@ -276,7 +276,7 @@
 					</div>
 					<!-- End: life time stats -->
 				</div>
-				<div class="col-md-8 col-sm-8" style="height: 580px;">
+				<div class="col-md-12 col-sm-12" style="height: auto;">
 				<!-- BEGIN PORTLET-->
 					<div class="portlet light ">
 						<div class="portlet-title">
@@ -289,7 +289,6 @@
 						<div class="portlet-body"  >
 							<div class="portlet-body">
 								<div class="row static-info">
-									<h4>Assets List</h4>
 									<div class="table-scrollable">
 
 										<table class="table table-hover">
@@ -396,60 +395,75 @@
 											</tr>
 
 										</foreach>
+											<tr class="danger">
+												<td >
+													 -
+												</td>
+												<td>
+													 Total
+												</td>
+												<td>
+													 -
+												</td>
+												<td>
+													 {$total.account} RMB
+												</td>
+												<td>
+													 -
+												</td>
+												<td>
+													-
+												</td>
+												<td>
+													 {$total.interest} RMB
+												</td>
+												<td>
+													-
+												</td>
+
+												<td>
+													
+												</td>
+												<td>
+													{$total.total} RMB
+
+												</td>
+											</tr>
 
 										</tbody>
 										</table>
 									</div>
 								</div>
-								<div class="row static-info">
-									<div class="col-md-3 name">
-										 Revenues (ongoing):
-									</div>
-									<div class="col-md-3 value">
-										 <i class="fa fa-paper-plane"></i> {$ongoingrevenues} <i class='fa fa-rmb'></i>
-										 <br>
-										 <foreach name="ongoingrevenuesarr" item="vo">
-										 <small><i class="fa fa-check-square-o"></i> {$vo['revenues']} {$vo['moneytype']} <br/></small>
-										</foreach>
-									</div>
-									<div class="col-md-4 name">
-										 Profit (ongoing):
-									</div>
-									<div class="col-md-2 value">
-										 <i class="fa fa-paper-plane"></i> {$ongoingprofit}
-									</div>
-								</div>
 
-								<div class="row static-info">
-									<div class="col-md-3 name">
-										 Profit (ongoing):
-									</div>
-									<div class="col-md-3 value">
-										 <i class="fa fa-paper-plane"></i> {$ongoingprofit} <i class='fa fa-rmb'></i>
-									</div>
-									<div class="col-md-3 name">
-										 Salary (ongoing):
-									</div>
-									<div class="col-md-3 value">
-										 <i class="fa fa-paper-plane"></i> {$ongoingsalary} <i class='fa fa-rmb'></i>
-									</div>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="row static-info">
+								<div class="col-md-4 col-sm-4" style="height: auto;">
+									<h4>
+										Assets on Attr statistic
+									</h4>
+									
 								</div>
-								<div class="row static-info">
-
+								<div class="col-md-4 col-sm-4" style="height: auto;">
+									<h4>
+										Assets on Bank statistic
+									</h4>
 								</div>
-								<div class="row static-info">
-									<div class="col-md-3 name">
-										 No.Orders(ongoing):
-									</div>
-									<div class="col-md-3 value">
-										 <i class="fa fa-paper-plane"></i> {$cin}
-									</div>
+								<div class="col-md-4 col-sm-4" style="height: auto;">
+									<h4>
+										Assets on MoneyType statistic
+									</h4>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				<!-- END PORTLET-->
 				</div>
+				
+				
+				
 			</div>
 			<!-- END PAGE CONTENT-->
 		</div>
