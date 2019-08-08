@@ -296,6 +296,62 @@
 					</div>
 					<!-- End: life time stats -->
 				</div>
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+						<div class="dashboard-stat blue-madison">
+							<div class="visual">
+								<i class="fa fa-briefcase fa-icon-medium"></i>
+							</div>
+							<div class="details">
+								<div class="number">
+									 {$total.account} rmb
+								</div>
+								<div class="desc">
+									 Total Amount
+								</div>
+							</div>
+							<a class="more" href="javascript:;">
+							View more <i class="m-icon-swapright m-icon-white"></i>
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="dashboard-stat red-intense">
+							<div class="visual">
+								<i class="fa fa-shopping-cart"></i>
+							</div>
+							<div class="details">
+								<div class="number">
+									{$total.interest} rmb
+								</div>
+								<div class="desc">
+									 Total Interest
+								</div>
+							</div>
+							<a class="more" href="javascript:;">
+							View more <i class="m-icon-swapright m-icon-white"></i>
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="dashboard-stat green-haze">
+							<div class="visual">
+								<i class="fa fa-group fa-icon-medium"></i>
+							</div>
+							<div class="details">
+								<div class="number">
+									 1 USD = {$currency} RMB
+								</div>
+								<div class="desc">
+									 CURRENCY RATE
+								</div>
+							</div>
+							<a class="more" href="javascript:;">
+							View more <i class="m-icon-swapright m-icon-white"></i>
+							</a>
+						</div>
+					</div>
+				</div>
 				<div class="col-md-12 col-sm-12" style="height: auto;">
 				<!-- BEGIN PORTLET-->
 					<div class="portlet light ">
@@ -306,9 +362,116 @@
 								<span class="caption-helper">assets statistic...</span>
 							</div>
 						</div>
+						<div class="portlet-body">
+							<div class="row static-info">
+								<div class="col-md-8 col-sm-12">
+									<h4>Table 1. Amounts Record list </h4>
+									<div class="table-scrollable">
+
+										<table class="table table-hover">
+										<thead>
+										<tr>
+											<th>
+												 #
+											</th>
+											<th>
+												 Bank
+											</th>
+											<th>
+												 Amount
+											</th>
+											<th>
+												 BuildDate
+											</th>
+											<th>
+												 CreatDate
+											</th>
+											<th>
+												 Des
+											</th>
+											<th>
+												 Operation
+											</th>
+										</tr>
+										</thead>
+										<tbody>
+										<foreach name="amounts" item="vo">
+											<tr>
+												<td>
+													 {$vo.id}
+												</td>
+												<td>
+													 <small>{$vo.bank}</small>
+												</td>
+												<td>
+													 <small>{$vo.amount}{$vo.moneytype}</small>
+												</td>
+												<td>
+													<small>{$vo.builddate}</small>
+												</td>
+												<td>
+													<small>{$vo.createtime}</small>
+												</td>
+												<td>
+													<small>{$vo.description}</small>
+												</td>
+												<td>
+													<a class="btn  btn-xs red" href="{:U('Finance/editAmountsPage?id='.$vo['id'].'');}">
+														<i class="fa fa-edit"></i>
+													</a>
+													<a class="btn btn-xs purple" href="#confirmModal{$vo['id']}" data-toggle="modal">
+														<i class="fa fa-times"></i>
+													</a>
+													<div class="modal fade modal-overflow in" id="confirmModal{$vo['id']}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+																	<h4 class="modal-title">Delete warning</h4>
+																</div>
+																<div class="modal-body">
+																	<p>Are you sure to delete this Amount?</p>
+																	<p>ID: {$vo['id']}</p>
+																	<p>Bank : {$vo['bank']}</p>
+																	<p>Amount : {$vo.amount}{$vo.moneytype}</p>
+																	<p>Build Date : {$vo.builddate}</p>
+
+																</div>
+																<div class="modal-footer">
+																	<a class="btn default" data-dismiss="modal"> Cancel </a>
+																	<a href="{:U('Finance/delamounts?id='.$vo['id'].'');}" type="button" class="btn blue"> Delete </a>
+																</div>
+															</div>
+															<!-- /.modal-content -->
+														</div>
+													<!-- /.modal-dialog -->
+													</div>
+
+												</td>
+											</tr>
+
+										</foreach>
+										</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="col-md-2 col-sm-12" style="height: auto;">
+									<h5>
+										<center>P1. Interest on Bank </center>
+									</h5>
+									<div id="abank" style="padding: 0px;width:90%;height: 300px;"></div>
+								</div>
+								<div class="col-md-2 col-sm-12" style="height: auto;">
+									<h5>
+										<center>P2. Interest on moneytype</center>
+									</h5>
+									<div id="amoneytype" style="padding: 0px;width:90%;height: 300px;"></div>
+								</div>
+							</div>
+						</div>
 						<div class="portlet-body"  >
-							<div class="portlet-body">
-								<div class="row static-info">
+							<div class="row static-info">
+								<div class="col-md-12 col-sm-12" style="height: auto;">
 									<h4>Table 1. Assets Record list </h4>
 									<div class="table-scrollable">
 										
@@ -427,7 +590,7 @@
 													 -
 												</td>
 												<td>
-													 {$total.account} RMB
+													 -
 												</td>
 												<td>
 													 -
@@ -455,126 +618,29 @@
 										</table>
 									</div>
 								</div>
-
-							</div>
-						</div>
-						
-						<div class="portlet-body">
-							<div class="row static-info">
-								<div class="col-md-8 col-sm-8" style="height: auto;">
-									<h4>Table 2. Amounts Record list </h4>
-									<div class="table-scrollable">
-
-										<table class="table table-hover">
-										<thead>
-										<tr>
-											<th>
-												 #
-											</th>
-											<th>
-												 Bank
-											</th>
-											<th>
-												 Amount
-											</th>
-											<th>
-												 BuildDate
-											</th>
-											<th>
-												 CreatDate
-											</th>
-											<th>
-												 Des
-											</th>
-											<th>
-												 Operation
-											</th>
-										</tr>
-										</thead>
-										<tbody>
-										<foreach name="amounts" item="vo">
-											<tr>
-												<td>
-													 {$vo.id}
-												</td>
-												<td>
-													 <small>{$vo.bank}</small>
-												</td>
-												<td>
-													 <small>{$vo.amount}{$vo.moneytype}</small>
-												</td>
-												<td>
-													<small>{$vo.builddate}</small>
-												</td>
-												<td>
-													<small>{$vo.createtime}</small>
-												</td>
-												<td>
-													<small>{$vo.description}</small>
-												</td>
-												<td>
-													<a class="btn  btn-xs red" href="{:U('Finance/editAmountsPage?id='.$vo['id'].'');}">
-														<i class="fa fa-edit"></i>
-													</a>
-													<a class="btn btn-xs purple" href="#confirmModal{$vo['id']}" data-toggle="modal">
-														<i class="fa fa-times"></i>
-													</a>
-													<div class="modal fade modal-overflow in" id="confirmModal{$vo['id']}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-														<div class="modal-dialog">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-																	<h4 class="modal-title">Delete warning</h4>
-																</div>
-																<div class="modal-body">
-																	<p>Are you sure to delete this Amount?</p>
-																	<p>ID: {$vo['id']}</p>
-																	<p>Bank : {$vo['bank']}</p>
-																	<p>Amount : {$vo.amount}{$vo.moneytype}</p>
-																	<p>Build Date : {$vo.builddate}</p>
-
-																</div>
-																<div class="modal-footer">
-																	<a class="btn default" data-dismiss="modal"> Cancel </a>
-																	<a href="{:U('Finance/delamounts?id='.$vo['id'].'');}" type="button" class="btn blue"> Delete </a>
-																</div>
-															</div>
-															<!-- /.modal-content -->
-														</div>
-													<!-- /.modal-dialog -->
-													</div>
-
-												</td>
-											</tr>
-
-										</foreach>
-										</tbody>
-										</table>
-									</div>
-
-								</div>
-								<div class="col-md-4 col-sm-4" style="height: auto;">
+								<div class="col-md-4 col-sm-12" style="height: auto;">
 									<h4>
-										<center>Assets on Attr statistic</center>
+										<center>Interest on Attr statistic</center>
 									</h4>
 									<div id="attr" style="padding: 0px;width:90%;height: 300px;"></div>
 
 								</div>
-								<div class="col-md-4 col-sm-4" style="height: auto;">
+								<div class="col-md-4 col-sm-12" style="height: auto;">
 									<h4>
-										<center>Assets on Bank statistic</center>
+										<center>Interest on Bank statistic</center>
 									</h4>
 									<div id="bank" style="padding: 0px;width:90%;height: 300px;"></div>
 								</div>
-								<div class="col-md-4 col-sm-4" style="height: auto;">
+								<div class="col-md-4 col-sm-12" style="height: auto;">
 									<h4>
-										<center>Assets on MoneyType statistic</center>
+										<center>Interest on MoneyType statistic</center>
 									</h4>
 									<div id="moneytype" style="padding: 0px;width:90%;height: 300px;"></div>
 								</div>
 							</div>
-
 						</div>
+						
+						
 					</div>
 				<!-- END PORTLET-->
 				</div>
@@ -625,9 +691,27 @@
 						}
 					});
 				}
+		    get_amounts_datas("bank");
+		    get_amounts_datas("moneytype");
+			function get_amounts_datas(type){
+					var data = {};
+				  data.type = type;
+					var url='__URL__/getAmountsPercent';
+					$.ajax({
+						type:"post",
+						url:url,
+						data:data,
+						dataType:"json",
+						success: function aa(data) {
+							console.log(data);
+							drawPieChart(data,"#a"+type,"count");
+
+						}
+					});
+				}
 				function drawPieChart(dataset,chartid,keyword){
 
-						console.log(dataset);
+						//console.log(dataset);
 
 						var width = $(chartid).width();
 						var height = $(chartid).height()*0.95;
@@ -675,7 +759,7 @@
 						  .attr("class", "label")
 						  .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
 						  .attr("dy", "0.35em")
-						  .text (function(d) { return d.data.label + ""+Math.round(1000 * d["data"][keyword] / total) / 10 + "%"; });
+						  .text (function(d) { return d.data.label + " "+  d["data"][keyword] + ""; });
 						var legend = svg.selectAll('.legend')
 							.data(color.domain())
 							.enter()

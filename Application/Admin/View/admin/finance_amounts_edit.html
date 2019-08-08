@@ -256,7 +256,7 @@
 	<div class="page-content">
 			<!-- BEGIN PAGE HEADER-->
 			<h3 class="page-title">
-			Assets Record Edit <small>Assets Record Edit</small>
+			Amount Edit <small>Edit Amount</small>
 			</h3>
 			<div class="page-bar">
 				<ul class="page-breadcrumb">
@@ -274,7 +274,7 @@
 						<i class="fa fa-angle-right"></i>
 					</li>
           			<li>
-						<a href="#">Assets Record Edit</a>
+						<a href="#">Amount Edit</a>
 					</li>
 				</ul>
 			</div>
@@ -286,7 +286,7 @@
 					<div class="portlet box purple ">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-gift"></i> Edit Assets #{$assets.id}
+								<i class="fa fa-gift"></i> Edit Amount #{$amounts.id}
 							</div>
 							<div class="tools">
 								<a href="" class="collapse">
@@ -300,19 +300,12 @@
 							</div>
 						</div>
 						<div class="portlet-body form">
-							<form class="form-horizontal" action="{:U('Finance/editAssets?');}" method="post"  role="form">
-                <div class="form-body">
+							<form class="form-horizontal" action="{:U('Finance/editAmounts?');}" method="post"  role="form">
+                				<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-3 control-label">Assets id</label>
 										<div class="col-md-9">
-                      	<input name="id" value="{$assets.id}" class="form-control input-inline input-medium" readonly />
-										</div>
-									</div>
-									<div class="form-group has-error">
-										<label class="col-md-3 control-label">Assets Name</label>
-										<div class="col-md-9">
-											<input name="name" type="text"  class="form-control input-inline input-medium" value="{$assets.name}"required />
-											<span class="help-inline"> Assets Name </span>
+                      						<input name="id" value="{$amounts.id}" class="form-control input-inline input-medium" readonly />
 										</div>
 									</div>
 									<div class="form-group has-error">
@@ -320,7 +313,7 @@
 										<div class="col-md-9">
 											<div class="checkbox-list">
 												<select name="bank" class="form-control input-inline input-large">
-													<if condition="$assets.bank eq 'ICBC' ">
+													<if condition="$amounts.bank eq 'ICBC' ">
 														<option value="ICBC" selected>工商银行</option>
 														<option value="CMB">招商银行</option>
 														<option value="BOC">中国银行</option>
@@ -329,7 +322,7 @@
 														<option value="CZCB">稠州银行</option>
 														<option value="paypal">paypal</option>
 														<option value="alipay">alipay</option>
-													<elseif condition="$assets.bank eq 'CMB'"/>
+													<elseif condition="$amounts.bank eq 'CMB'"/>
 														<option value="CMB" selected>招商银行</option>
 														<option value="ICBC">工商银行</option>
 														<option value="BOC">中国银行</option>
@@ -338,7 +331,7 @@
 														<option value="CZCB">稠州银行</option>
 														<option value="paypal">paypal</option>
 														<option value="alipay">alipay</option>
-													<elseif condition="$assets.bank eq 'BOC'"/>
+													<elseif condition="$amounts.bank eq 'BOC'"/>
 														<option value="BOC" selected>中国银行</option>
 														<option value="ICBC">工商银行</option>
 														<option value="CMB">招商银行</option>
@@ -347,7 +340,7 @@
 														<option value="CZCB">稠州银行</option>
 														<option value="paypal">paypal</option>
 														<option value="alipay">alipay</option>
-													<elseif condition="$assets.bank eq 'CMBC'"/>
+													<elseif condition="$amounts.bank eq 'CMBC'"/>
 														<option value="CMBC" selected>民生银行</option>
 														<option value="ICBC">工商银行</option>
 														<option value="CMB">招商银行</option>
@@ -356,7 +349,7 @@
 														<option value="CZCB">稠州银行</option>
 														<option value="paypal">paypal</option>
 														<option value="alipay">alipay</option>
-													<elseif condition="$assets.bank eq 'CCB'"/>
+													<elseif condition="$amounts.bank eq 'CCB'"/>
 														<option value="CCB" selected>建设银行</option>
 														<option value="ICBC">工商银行</option>
 														<option value="CMB">招商银行</option>
@@ -365,7 +358,7 @@
 														<option value="CZCB">稠州银行</option>
 														<option value="paypal">paypal</option>
 														<option value="alipay">alipay</option>
-													<elseif condition="$assets.bank eq 'CZCB'"/>
+													<elseif condition="$amounts.bank eq 'CZCB'"/>
 														<option value="CZCB" selected>稠州银行</option>
 														<option value="ICBC">工商银行</option>
 														<option value="CMB">招商银行</option>
@@ -374,7 +367,7 @@
 														<option value="CCB">建设银行</option>
 														<option value="paypal">paypal</option>
 														<option value="alipay">alipay</option>
-													<elseif condition="$assets.bank eq 'paypal'"/>
+													<elseif condition="$amounts.bank eq 'paypal'"/>
 														<option value="paypal" selected>paypal</option>
 														<option value="ICBC">工商银行</option>
 														<option value="CMB">招商银行</option>
@@ -383,7 +376,7 @@
 														<option value="CCB">建设银行</option>
 														<option value="CZCB">稠州银行</option>
 														<option value="alipay">alipay</option>
-													<elseif condition="$assets.bank eq 'alipay'"/>
+													<elseif condition="$amounts.bank eq 'alipay'"/>
 														<option value="alipay" selected>alipay</option>
 														<option value="ICBC">工商银行</option>
 														<option value="CMB">招商银行</option>
@@ -402,7 +395,7 @@
 										<div class="col-md-9">
 											<div class="checkbox-list">
 												<select name="moneytype" class="form-control input-inline input-large">
-													<if condition="$assets.moneytype eq 'USD' ">
+													<if condition="$amounts.moneytype eq 'USD' ">
 														<option value="USD" selected>USD</option>
 														<option value="RMB">RMB</option>
 													<else/>
@@ -416,71 +409,14 @@
 									<div class="form-group has-error">
 										<label class="col-md-3 control-label">Amount</label>
 										<div class="col-md-9">
-											<input name="amount" type="number" min="0" step="0.01" class="form-control input-inline input-medium" value="{$assets.amount}" required>
-										</div>
-									</div>
-									<div class="form-group has-error">
-										<label class="col-md-3 control-label">Year Rate(%)</label>
-										<div class="col-md-9">
-											<input name="yearrate" type="number" min="0" step="0.01" class="form-control input-inline input-medium" value = "{$assets.year_rate}" required>
+											<input name="amount" type="number" min="0" step="0.01" class="form-control input-inline input-medium" value="{$amounts.amount}" required>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-3 control-label">Date Zone</label>
 										<div class="col-md-3">
 											<div class="input-group input-large date-picker input-daterange" data-date="{$dateform}" data-date-format="yyyy-mm-dd">
-												<input name="startdate" type="text" class="form-control" value="{$assets.startdate}" required/>
-												<span class="input-group-addon">
-												to </span>
-												<input name="enddate" type="text" class="form-control" value="{$assets.enddate}" required/>
-											</div>
-										</div>
-									</div>
-									<div class="form-group has-error">
-										<label class="col-md-3 control-label">Attr</label>
-										<div class="col-md-9">
-											<div class="checkbox-list">
-												<select name="attr" class="form-control input-inline input-large">
-													<option value="{$assets.attr}" selected>{$assets.attr}</option>
-													<if condition="$assets.attr eq '国债' ">
-														<option value="结构性存款">结构性存款</option>
-														<option value="保本理财">保本理财</option>
-														<option value="活期">活期</option>
-														<option value="货币基金">货币基金</option>
-														<option value="其他">其他</option>
-													<elseif condition="$assets.attr eq '结构性存款'"/>
-														<option value="国债">国债</option>
-														<option value="保本理财">保本理财</option>
-														<option value="活期">活期</option>
-														<option value="货币基金">货币基金</option>
-														<option value="其他">其他</option>
-													<elseif condition="$assets.attr eq '保本理财'"/>
-														<option value="国债">国债</option>
-														<option value="结构性存款">结构性存款</option>
-														<option value="活期">活期</option>
-														<option value="货币基金">货币基金</option>
-														<option value="其他">其他</option>
-													<elseif condition="$assets.attr eq '活期'"/>
-														<option value="国债">国债</option>
-														<option value="结构性存款">结构性存款</option>
-														<option value="保本理财">保本理财</option>
-														<option value="货币基金">货币基金</option>
-														<option value="其他">其他</option>
-													<elseif condition="$assets.attr eq '货币基金'"/>
-														<option value="国债">国债</option>
-														<option value="结构性存款">结构性存款</option>
-														<option value="保本理财">保本理财</option>
-														<option value="活期">活期</option>
-														<option value="其他">其他</option>
-													<elseif condition="$assets.attr eq '其他'"/>
-														<option value="国债">国债</option>
-														<option value="结构性存款">结构性存款</option>
-														<option value="保本理财">保本理财</option>
-														<option value="活期">活期</option>
-														<option value="货币基金">货币基金</option>
-													</if>
-
-												</select>
+												<input name="builddate" type="text" class="form-control" value="{$amounts.builddate}" required/>
 											</div>
 										</div>
 									</div>
@@ -494,7 +430,7 @@
 										<div class="row">
 											<div class="col-md-offset-3 col-md-9">
 												<button type="submit" class="btn green">Submit</button>
-	                      <a href="{:U('Finance/assetsPage');}" type="button" class="btn default">Cancel</a>
+	                      						<a href="{:U('Finance/assetsPage');}" type="button" class="btn default">Cancel</a>
 											</div>
 										</div>
 									</div>
