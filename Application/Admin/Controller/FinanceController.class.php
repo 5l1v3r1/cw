@@ -18,9 +18,17 @@ class FinanceController extends CommonController {
 			$item = $ME->where($cc)->find();
 			$v["interest"] = round($v["amount"] * $item['rating']* ($v["year_rate"] * 0.01/365) *$daystep,3);
 			$assets[$k] = $v;
-			$account_sum = $v["amount"] * $item['rating'] + $account_sum;
+			//$account_sum = $v["amount"] * $item['rating'] + $account_sum;
 			$interest_sum = $interest_sum + $v["interest"];
 
+		}
+		$M = M('finance_amounts');
+		$amounts = $M ->select();
+		foreach($amounts as $k=>$v){
+			$ME = M('configure_exchange');
+			$cc['currency'] = $v['moneytype'];
+			$item = $ME->where($cc)->find();
+			$account_sum = $v["amount"] * $item['rating'] + $account_sum;
 		}
 		$total["account"] = $account_sum;
 		$total["interest"] = $interest_sum;
@@ -28,12 +36,18 @@ class FinanceController extends CommonController {
 		//print_r($assets[$k]);
 		$this->assign('total',$total);
 		$this->assign('assets',$assets);
+		$this->assign('amounts',$amounts);
 		$this->display(T('admin/finance_assets_page'));
 
 	}
 	public function assetsAddPage(){
-		echo "add";
+		//echo "add";
 		$this->display(T('admin/finance_assets_add'));
+
+	}
+	public function amountsAddPage(){
+		//echo "add";
+		$this->display(T('admin/finance_amounts_add'));
 
 	}
 	public function addAssets(){
@@ -53,6 +67,19 @@ class FinanceController extends CommonController {
 		//print_r($data);
 		$this->success('Add Assets successfully!',U('Finance/assetsPage'),1);
 	}
+	public function addAmounts(){
+		$data['bank'] = I('post.bank');//sort id docurls
+		$data['moneytype'] = I('post.moneytype');//sort id
+		$data['amount'] = I('post.amount');//description
+		$data['builddate'] = I('post.builddate');//sort id
+		$data['description'] = I('post.description');
+		$Model = M('finance_amounts');
+		$maxid = $Model->max('id');
+		$data['id'] = $maxid + 1;
+		$Model->data($data)->add();
+		//print_r($data);
+		$this->success('Add Amount successfully!',U('Finance/assetsPage'),1);
+	}
 	public function editAssetsPage(){
 		//finance_assets_edit.html
 		$id = I('get.id');
@@ -62,6 +89,8 @@ class FinanceController extends CommonController {
 		//dump($result);
 		$this->assign('assets',$result);
 		$this->display(T('admin/finance_assets_edit'));
+	}
+	public function editAmountsPage(){
 	}
 	public function editAssets(){
 		$cond['id'] = I('post.id');
@@ -84,6 +113,8 @@ class FinanceController extends CommonController {
 		$Model = M('finance_assets');
 		$Model->where($cond)->delete();
 		$this->success('Delete Assets successfully!',U('Finance/assetsPage'),1);
+	}
+	public function delamounts(){
 	}
 	public function getAssetsPercent(){
 		$type = I('post.type','','htmlspecialchars');//;
