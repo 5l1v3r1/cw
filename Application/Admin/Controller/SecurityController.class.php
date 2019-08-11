@@ -50,6 +50,12 @@ class SecurityController extends CommonController {
 		$this->display(T('admin/security_ssh_list'));
 
 	}
+	public function taobaoRecordPage(){
+		$this->display(T('admin/security_taobao_list'));
+	}
+	public function addTaobaopage(){
+		$this->display(T('admin/security_taobao_add'));
+	}
 
 
 }
