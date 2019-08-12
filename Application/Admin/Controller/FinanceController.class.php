@@ -9,7 +9,7 @@ class FinanceController extends CommonController {
 		$account_sum = 0;
 		$interest_sum = 0;
 		$currency = 0;
-		
+
 		foreach($assets as $k=>$v){
 			$datetime_start = new \DateTime($v["startdate"]);
 			$datetime_end = new \DateTime($v["enddate"]);
@@ -117,7 +117,7 @@ class FinanceController extends CommonController {
 		$Model = M('finance_amounts');
 		$flag = $Model->where($cond)->save($data);
 		$this->success('Update Amount '. $cond['id'] .' successfully!',U('Finance/assetsPage'),1);
-		
+
 	}
 	public function editAssets(){
 		$cond['id'] = I('post.id');
@@ -208,14 +208,14 @@ class FinanceController extends CommonController {
 				$cc['para'] = $v['moneytype'];
 				$item = $ME->where($cc)->find();
 				$account_sum = round($v["amount"] * $item['rating'],3) + $account_sum;
-				
+
 			}
 			$room = [];
 			$room["label"] = $v[$type];
 			$room["count"] =  $account_sum;
 			array_push($dataset,$room);
 		}
-		
+
 		$this->ajaxReturn($dataset);
 	}
 

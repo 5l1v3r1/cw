@@ -6,6 +6,7 @@ return array(
 	'DB_LIKE_FIELDS'=>'USERNAME|EMAIL|title|domainname', //
 	'NOT_M_MODULE' => 'Index,Exit', //
 	),
+	'UPLOAD_PATH' => 'Uploads',
 	'PAGE_LIMIT_WORKERS' => 30,
 	'AUTH_SUPERADMIN' => '1',//super administrator
 	'LOGIN_TIPS' => 'Please log in first!',

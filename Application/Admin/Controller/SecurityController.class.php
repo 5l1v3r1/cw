@@ -1,6 +1,10 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
+use Org\Util\CategoryTree;
+use Think\Upload;
+use Think\Image;
+use Think\Storage\Driver\File;
 class SecurityController extends CommonController {
 	public function orderRecordPage(){
 		$pp = 0;
@@ -51,18 +55,89 @@ class SecurityController extends CommonController {
 
 	}
 	public function taobaoRecordPage(){
+		$Model = M('security_taobao');
+		$goods = $Model ->select();
+		$this->assign('goods',$goods);// 赋值分页输出
+
 		$this->display(T('admin/security_taobao_list'));
 	}
 	public function addTaobaopage(){
 		$this->display(T('admin/security_taobao_add'));
 	}
 	public function addTaobaoGood(){
+		$data['goodid'] = I('post.goodid');//description
+		$data['goodname'] = I('post.goodname');//description
+		$data['addtime'] = I('post.addtime');//sort id
+		$data['description'] = I('post.description');
+		$Model = M('security_taobao');
+		$Model->data($data)->add();
+		//print_r($data);
+		$this->success('Add Goods successfully!',U('Security/taobaoRecordPage'),1);
+
+	}
+	public function editTaobaoGoodsPage(){
+		$goodid = I('get.goodid');
+		$Model = M('security_taobao');
+		$cond['goodid'] = $goodid;
+		$result = $Model->where($cond)->find();
+		if(!empty($result)){
+			$this->assign('goods',$result);
+			$this->display(T('admin/security_taobao_edit'));
+		}
+		else{
+			$this->error('Goods #'.$goodid. ' no exist!',U('Security/taobaoRecordPage'),1);
+		}
+		//dump($result);
+
+	}
+	public function updateTaobaoGoods(){
+		$cond['goodid'] = I('post.goodid');
+		$data['goodname'] = I('post.goodname');//description
+		$data['addtime'] = I('post.addtime');//sort id
+		$data['description'] = I('post.description');
+		$Model = M('security_taobao');
+		$flag = $Model->where($cond)->save($data);
+		$this->success('Update Goods  #'.$cond['goodid']. ' successfully!',U('Security/taobaoRecordPage'),1);
+
+	}
+	public function delTaobaoGood(){
+		$cond['goodid'] = I('get.goodid');
+		$Model = M('security_taobao');
+		$result = $Model->field("imagename")->where($cond)->find();
+		$Model->where($cond)->delete();
+		//print_r($result);
+		if($result["imagename"] != ""){
+			$imageurl = "./".C('UPLOAD_PATH')."/".$result["imagename"];
+			//$Model->where($cond)->delete();
+			//echo $imageurl;
+			if(file_exists($imageurl)){
+				unlink($imageurl);
+			}
+		}
+
+		$this->success('Delete Goods #'.$cond['goodid']. ' successfully!',U('Security/taobaoRecordPage'),1);
+	}
+	public function uploadTBGoodsPicPage(){
+		$goodid = I('get.goodid');
+		$Model = M('security_taobao');
+		$cond['goodid'] = $goodid;
+		$result = $Model->where($cond)->find();
+		if(!empty($result)){
+			$this->assign('goods',$result);
+			$this->display(T('admin/security_taobao_addpic'));
+		}
+		else{
+			$this->error('Goods #'.$goodid. ' no exist!',U('Security/taobaoRecordPage'),1);
+		}
+	}
+	public function addTaobaoGoodPic(){
+		$gid = I('get.gid');
 		$config = array(
 			'key' =>'file_upload',
       'maxSize' => 31457280,
-      'rootPath'  =>"./Public/uploads/",
+      'rootPath'  =>"./".C('UPLOAD_PATH')."/",
       'savePath'  =>'',
-      'saveName' => 'xxx',
+      'saveName' => time().'_'.$gid,
       'exts' => array('jpg', 'gif', 'png', 'jpeg'),
       'autoSub' => false,
       'replace' => true,
@@ -82,13 +157,21 @@ type: "image/jpeg"
 url: "http://127.0.0.1/jQuery-File-Upload/server/php/files/1.jpg"*/
 			$cell = array();
 			$cell["deleteType"] = "DELETE";
-			$cell["deleteUrl"] = $file;
+			$cell["deleteUrl"] = $gid;
 			$cell["name"] = $file["savename"];
 			$cell["size"] = $file["size"];
-			$cell["thumbnailUrl"] = __ROOT__."/Public/uploads/".$file["savename"];
+			$cell["thumbnailUrl"] = __ROOT__."/".C('UPLOAD_PATH')."/".$file["savename"];
 			$cell["type"] = $file["type"];
-			$cell["url"] = __ROOT__."/Public/uploads/".$file["savename"];
+			$cell["url"] = __ROOT__."/".C('UPLOAD_PATH')."/".$file["savename"];
 			array_push($dataset,$cell);
+			$Model = M('security_taobao');
+			$cond['goodid'] = $gid;
+			$goods = $Model->where($cond)->find();
+			$datas['imagename'] = $file["savename"];
+			if(!empty($goods)){
+				$Model->where($cond)->save($datas);
+			}
+
 		}
 		$res = array();
 		$res["files"]= $dataset;

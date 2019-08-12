@@ -293,16 +293,23 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th>
-											ID
-										</th>
-										<th>
-											Create Date
-										</th>
-										<th>
-											#Order ID
+											GoodID
+
 										</th>
 										<th width="10%">
-											Order Data
+											GoodName
+										</th>
+										<th width="10%">
+											Image
+										</th>
+										<th>
+											status
+										</th>
+										<th>
+											createtime
+										</th>
+										<th>
+											description
 										</th>
 										<th >
 											Operation
@@ -310,19 +317,68 @@
 									</tr>
 									</thead>
 									<tbody>
-										<foreach name="records" item="vo">
+										<foreach name="goods" item="vo">
 											<tr role="row">
 												<td>
-													{$vo.id}
+													{$vo.goodid}<br>
+													<small><i class="fa fa-clock-o" aria-hidden="true"></i>	{$vo.addtime} </small>
+												</td>
+												<td>
+													{$vo.goodname}
+												</td>
+												<td>
+													<if condition="$vo.imagename neq '' ">
+														<img src="__ROOT__/{:C("UPLOAD_PATH");}/{$vo.imagename}" width="90%" height="auto" />
+													<else />
+														<span class="label label-sm label-default"> no image</span>
+													</if>
+												</td>
+												<td>
+													<if condition="$vo.status eq 1 ">
+														<span class="label label-sm label-success"> health</span>
+													<else />
+														<span class="label label-sm label-warning"> 404</span>
+													</if>
 												</td>
 												<td>
 													{$vo.createtime}
 												</td>
 												<td>
-													{$vo.orderid}
+													{$vo.description}
 												</td>
-												<td>{$vo.orderinfo}</td>
-												<td>{$vo.op}</td>
+												<td>
+													<a class="btn  btn-xs red" href="{:U('Security/editTaobaoGoodsPage?goodid='.$vo['goodid'].'');}">
+														<i class="fa fa-edit"></i>
+													</a>
+													<a class="btn  btn-xs red" href="{:U('Security/uploadTBGoodsPicPage?goodid='.$vo['goodid'].'');}">
+														<i class="fa fa-edit"></i>
+													</a>
+													<a class="btn btn-xs purple" href="#confirmModal{$vo['goodid']}" data-toggle="modal">
+														<i class="fa fa-times"></i>
+													</a>
+													<div class="modal fade modal-overflow in" id="confirmModal{$vo['goodid']}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+																	<h4 class="modal-title">Delete warning</h4>
+																</div>
+																<div class="modal-body">
+																	<p>Are you sure to delete this taobao good?</p>
+																	<p>ID: {$vo['goodid']}</p>
+																	<p>Goodname : {$vo['goodname']}</p>
+
+																</div>
+																<div class="modal-footer">
+																	<a class="btn default" data-dismiss="modal"> Cancel </a>
+																	<a href="{:U('Security/delTaobaoGood?goodid='.$vo['goodid'].'');}" type="button" class="btn blue"> Delete </a>
+																</div>
+															</div>
+															<!-- /.modal-content -->
+														</div>
+													<!-- /.modal-dialog -->
+													</div>
+												</td>
 											</tr>
 										</foreach>
 									</tbody>
