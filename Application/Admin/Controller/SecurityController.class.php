@@ -56,6 +56,46 @@ class SecurityController extends CommonController {
 	public function addTaobaopage(){
 		$this->display(T('admin/security_taobao_add'));
 	}
+	public function addTaobaoGood(){
+		$config = array(
+			'key' =>'file_upload',
+      'maxSize' => 31457280,
+      'rootPath'  =>"./Public/uploads/",
+      'savePath'  =>'',
+      'saveName' => 'xxx',
+      'exts' => array('jpg', 'gif', 'png', 'jpeg'),
+      'autoSub' => false,
+      'replace' => true,
+      //'subName' => array('date','Ymd'),
+    );
+		$upload = new \Think\Upload($config);// 实例化上传类
+		$info   =   $upload->upload();
+		$dataset = [];
+		foreach($info as $file)
+		{
+			/*deleteType: "DELETE"
+deleteUrl: "http://127.0.0.1/jQuery-File-Upload/server/php/index.php?file=1.jpg"
+name: "1.jpg"
+size: 243000
+thumbnailUrl: "http://127.0.0.1/jQuery-File-Upload/server/php/files/thumbnail/1.jpg"
+type: "image/jpeg"
+url: "http://127.0.0.1/jQuery-File-Upload/server/php/files/1.jpg"*/
+			$cell = array();
+			$cell["deleteType"] = "DELETE";
+			$cell["deleteUrl"] = $file;
+			$cell["name"] = $file["savename"];
+			$cell["size"] = $file["size"];
+			$cell["thumbnailUrl"] = __ROOT__."/Public/uploads/".$file["savename"];
+			$cell["type"] = $file["type"];
+			$cell["url"] = __ROOT__."/Public/uploads/".$file["savename"];
+			array_push($dataset,$cell);
+		}
+		$res = array();
+		$res["files"]= $dataset;
+		//$this->error($pic_src);
+		$this->ajaxReturn($res);
+		//$this->display(T('admin/security_taobao_add'));
+	}
 
 
 }
